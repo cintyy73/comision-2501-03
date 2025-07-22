@@ -1,77 +1,50 @@
-let title = document.getElementById("title");
-let element = document.querySelector("#two");
-let img = document.querySelector("img");
-let subtitle = document.querySelector(".heading");
-let cat = document.getElementById("cat");
-
 console.log(document);
+console.log(document.body.nodeType); // 1 (elemento)
+console.log(document.body.childNodes[0].nodeType); // 3 (texto)
 
-console.log(document.querySelector("h1"));
-console.log(document.querySelector("p"));
-console.log(document.querySelectorAll("p"));
-console.log(document.querySelector(".heading"));
+console.log(window.innerWidth);
+console.log(document.title);
 
-console.log(document.querySelector(".tres"));
 
-console.log(document.querySelector("#title"));
+window.alert('Hola desde window');
 
-document.getElementById("title");
-console.log(document.getElementsByClassName("tres"));
+let parrafo = document.querySelector('p');
+parrafo.classList.add('destacado');
+parrafo.classList.remove('texto');
+parrafo.classList.toggle('oculto');
+console.log(parrafo.classList.contains('destacado')); // true
 
-function changeTitle() {
-  title.style.color = "red";
+let img = document.getElementById("imagen-perfil");
+console.log(img.getAttribute("src"));
+img.setAttribute("alt", "Nueva descripción");
+// img.removeAttribute("src"); // Comentado para mantener la imagen visible
+
+function cambiarTodo() {
+  // Cambiar el título principal
+  document.getElementById('titulo-principal').innerText = '¡Título cambiado!';
+  
+  // Cambiar la imagen de portada
+  let imgPortada = document.querySelector('#imagen-portada');
+  imgPortada.setAttribute('src', 'https://cdn.pixabay.com/photo/2025/06/27/07/36/dragon-9683286_1280.jpg');
+  
+  // Cambiar el subtítulo
+  document.getElementById('subtitulo').innerText = '¡DOM Modificado!';
 }
 
-console.log(element.classList);
-
-function changeP() {
-  element.classList.toggle("parrafo-cambiado");
-  console.log({ "clase del parrafo": element.classList });
+// Función separada para toggle del párrafo
+function toggleParrafo() {
+  document.querySelector('.parrafo').classList.toggle('resaltado');
 }
 
-function darkMode() {
-  document.body.classList.toggle("dark");
-  console.log(document.body.classList.contains("dark"));
-}
-
-console.log(title.classList.contains("tres"));
-console.log(title.classList.contains("heading"));
-
-function imgHasAttribute() {
-  if (img.hasAttribute("src")) {
-    alert("Tiente src sí!!!!");
-    console.log(img.getAttribute("src"));
+// Función para alternar modo claro/oscuro
+function toggleModo() {
+  document.body.classList.toggle('dark');
+  
+  // Cambiar texto del botón según el modo
+  const botonModo = document.querySelector('button[onclick="toggleModo()"]');
+  if (document.body.classList.contains('dark')) {
+    botonModo.innerText = 'Modo Claro';
   } else {
-    alert("noooooo tiene src");
-  }
-}
-
-function imgRemoveAttribute() {
-  img.removeAttribute("src");
-}
-
-function imgChangeAttribute() {
-  img.setAttribute(
-    "src",
-    "https://media.istockphoto.com/id/2151266859/photo/a-cat-in-a-blue-hoodie-with-a-gold-chain-and-sunglasses-lies-near-the-bills-orange-background.jpg?s=1024x1024&w=is&k=20&c=cErvHbYaMCmxrz4j6-_RarFDUZqETNWLiF9dSzwNzlY="
-  );
-}
-
-// subtitle.style.color = 'red'
-
-function hideCat() {
-  if (img.classList.contains("img-none")) {
-    //oculto
-    console.log(img.classList);
-    img.classList.remove("img-none"); //quito ocultar
-    img.classList.add("img-show"); //muestro
-    console.log(img.classList);
-    cat.innerText = "Chau Gatito";
-  } else {
-    console.log(img.classList);
-    img.classList.remove("img-show"); //quito mostrar
-    img.classList.add("img-none"); //oculto
-    console.log(img.classList);
-    cat.innerText = "Hola Gatito";
+    botonModo.innerText = 'Modo Oscuro';
   }
 }
