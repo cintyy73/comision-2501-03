@@ -1,77 +1,58 @@
-let title = document.getElementById("title");
-let element = document.querySelector("#two");
-let img = document.querySelector("img");
-let subtitle = document.querySelector(".heading");
-let cat = document.getElementById("cat");
-
-console.log(document);
-
-console.log(document.querySelector("h1"));
-console.log(document.querySelector("p"));
-console.log(document.querySelectorAll("p"));
-console.log(document.querySelector(".heading"));
-
-console.log(document.querySelector(".tres"));
-
-console.log(document.querySelector("#title"));
-
-document.getElementById("title");
-console.log(document.getElementsByClassName("tres"));
-
-function changeTitle() {
-  title.style.color = "red";
+function $(selector) {
+  return document.querySelector(selector);
 }
 
-console.log(element.classList);
+console.log($("#message"));
+let container = document.getElementById("container");
+let button = $("#show");
+let button2 = $("#double");
 
-function changeP() {
-  element.classList.toggle("parrafo-cambiado");
-  console.log({ "clase del parrafo": element.classList });
+// Seleccionar por atributos específicos
+const elemento = $("[data-info]");
+const botones = document.querySelectorAll('[type="button"]');
+const enlaces = document.querySelectorAll('a[href^="https"]');
+
+button.addEventListener("click", function () {
+  console.log("ver mas");
+  container.innerHTML = "<p>Insertado desde js</p>";
+  container.style.cssText = "background: yellow; font-size: 50px; color: blue";
+});
+
+function show() {
+  console.log("ver doble");
+  container.innerHTML += "<p>Insertado doble desde js</p>";
 }
 
-function darkMode() {
-  document.body.classList.toggle("dark");
-  console.log(document.body.classList.contains("dark"));
+button2.addEventListener("click", show);
+
+const second = container.children[1];
+console.log(second);
+console.log(second.parentElement);
+
+console.log("Anterior:", second.previousElementSibling);
+console.log("Siguiente:", second.nextElementSibling);
+
+const first = document.getElementById("container").children[0];
+
+const button3 = document.createElement("button");
+const text = document.createTextNode("Clickear");
+button3.appendChild(text);
+document.body.appendChild(button3);
+
+button3.addEventListener("click", function () {
+  const message = document.createElement("p");
+  message.innerText = "Muchas gracias vuelva prontos";
+  document.body.appendChild(message);
+});
+
+const container_message = $("#message");
+
+function showMessage(title, text, student) {
+  container_message.innerHTML = `
+  <h2>${title}</h2>
+  <p>${text}</p>
+  <p>Saludos ${student}</p>
+  `;
 }
 
-console.log(title.classList.contains("tres"));
-console.log(title.classList.contains("heading"));
-
-function imgHasAttribute() {
-  if (img.hasAttribute("src")) {
-    alert("Tiente src sí!!!!");
-    console.log(img.getAttribute("src"));
-  } else {
-    alert("noooooo tiene src");
-  }
-}
-
-function imgRemoveAttribute() {
-  img.removeAttribute("src");
-}
-
-function imgChangeAttribute() {
-  img.setAttribute(
-    "src",
-    "https://media.istockphoto.com/id/2151266859/photo/a-cat-in-a-blue-hoodie-with-a-gold-chain-and-sunglasses-lies-near-the-bills-orange-background.jpg?s=1024x1024&w=is&k=20&c=cErvHbYaMCmxrz4j6-_RarFDUZqETNWLiF9dSzwNzlY="
-  );
-}
-
-// subtitle.style.color = 'red'
-
-function hideCat() {
-  if (img.classList.contains("img-none")) {
-    //oculto
-    console.log(img.classList);
-    img.classList.remove("img-none"); //quito ocultar
-    img.classList.add("img-show"); //muestro
-    console.log(img.classList);
-    cat.innerText = "Chau Gatito";
-  } else {
-    console.log(img.classList);
-    img.classList.remove("img-show"); //quito mostrar
-    img.classList.add("img-none"); //oculto
-    console.log(img.classList);
-    cat.innerText = "Hola Gatito";
-  }
-}
+showMessage("Bienvenidos", "a nuestra tercer clase", 'Cintia')
