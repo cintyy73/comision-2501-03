@@ -1,27 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Clase 02</title>
+  <meta charset="UTF-8" />
+  <title>Ejemplos de Eventos</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .seccion { margin-bottom: 40px; }
+    .caja {
+      padding: 20px;
+      margin: 10px 0;
+      border: 2px solid black;
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
-
 <body>
-    <h1 class="heading" id="title">Titulo</h1>
-    <img id="banner"
-        src="https://media.istockphoto.com/id/2151625435/photo/rich-cat-in-a-blue-hoodie-with-a-gold-chain-and-sunglasses-sits-near-money-orange-background.jpg?s=1024x1024&w=is&k=20&c=H9xzeJvvFwtwYzrenpjxkZcOM0NGGnmpkT4jqmRUPPQ="
-        alt="gatito fachero">
-    <div id="container">
-        <p>Parrafo 1</p>
-        <p id="two">Parrafo 2 </p>
-        <p class="tres">Parrafo 3</p>
-    </div>
-    <button id="show">Ver más</button>
-    <button id="double">Ver doble</button>
-    <div id="message"></div>
-    <script src="app.js"></script>
-</body>
 
+  <h1>🧪 Ejemplos Visuales de Eventos en JavaScript</h1>
+
+  <!-- 1. CLICK -->
+  <div class="seccion">
+    <h2>1. Evento de Click</h2>
+    <button id="btnClick">Haz clic aquí</button>
+    <p id="clickMsg"></p>
+  </div>
+
+  <!-- 2. TECLADO -->
+  <div class="seccion">
+    <h2>2. Evento de Teclado (keydown)</h2>
+    <input type="text" id="tecladoInput" placeholder="Escribí algo" />
+    <p id="keyMsg"></p>
+  </div>
+
+  <!-- 3. MOUSE -->
+  <div class="seccion">
+    <h2>3. Evento de Mouse (mouseover / mouseout)</h2>
+    <div id="hoverBox" class="caja">Pasa el mouse por aquí</div>
+  </div>
+
+  <!-- 4. TRIGGER -->
+  <div class="seccion">
+    <h2>4. Trigger + preventDefault</h2>
+    <a href="https://google.com" id="enlace">Ir a Google</a>
+    <p id="linkMsg"></p>
+  </div>
+
+  <!-- 5. PROPAGACIÓN -->
+  <div class="seccion">
+    <h2>5. Propagación de Eventos</h2>
+    <div id="abuelo" class="caja">
+      Abuelo
+      <div id="padre" class="caja" style="margin:10px;">
+        Padre
+        <div id="hijo" class="caja" style="margin:10px;">Hijo</div>
+      </div>
+    </div>
+    <p id="bubblingMsg"></p>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
 </html>
