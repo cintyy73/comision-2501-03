@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>stopPropagation Demo</title>
+  <style>
+    #container {
+      padding: 40px;
+      background-color: #f0f0f0;
+      border: 2px dashed #999;
+      text-align: center;
+    }
+
+    #button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Stop- propagation</h2>
+  <div id="container">
+    <button id="button">Haz click</button>
+  </div>
+  <script>
+    const container = document.getElementById("container")
+    const button = document.getElementById("button")
+
+    container.addEventListener("click", () => {
+      container.style.background = "red"
+    })
+
+    button.addEventListener("click", () => {
+      event.stopPropagation()
+      document.body.style.background = "purple"
+      alert("clickeaste el botón")
+    })
+  </script>
+</body>
+
+</html>

@@ -1,64 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Ejemplos de Eventos</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .seccion { margin-bottom: 40px; }
-    .caja {
-      padding: 20px;
-      margin: 10px 0;
-      border: 2px solid black;
-      background-color: #f0f0f0;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario con Validación</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
+    <h1>Registro</h1>
 
-  <h1>🧪 Ejemplos Visuales de Eventos en JavaScript</h1>
+    <form id="form-register">
+        <label>
+            Nombre:
+            <input type="text" name="name" />
+        </label>
+        <label>
+            Email:
+            <input type="email" name="email" />
+        </label>
+        <fieldset>
+            <legend>Género:</legend>
+            <label><input type="radio" name="gender" value="female" /> Femenino</label>
+            <label><input type="radio" name="gender" value="male" /> Masculino</label>
+              <label><input type="radio" name="gender" value="x" /> X </label>
+        </fieldset>
 
-  <!-- 1. CLICK -->
-  <div class="seccion">
-    <h2>1. Evento de Click</h2>
-    <button id="btnClick">Haz clic aquí</button>
-    <p id="clickMsg"></p>
-  </div>
+        <label>
+            Tipo de teléfono:
+            <select name="type-phone">
+                <option value="">Selecciona</option>
+                <option value="mobile">Celular</option>
+                <option value="home">Casa</option>
+                <option value="work">Trabajo</option>
+            </select>
+        </label>
+        <labe>
+            número telefónico:
+            <input type="tel" name="phone-number" pattern="[0-9]+" />
+        </labe>
+        <button type="submit">Enviar </button>
+    </form>
+        <div id="error" style="display: none;"></div>
+        <div id="bienvenida" class="bienvenida" style="display:none;"></div>
 
-  <!-- 2. TECLADO -->
-  <div class="seccion">
-    <h2>2. Evento de Teclado (keydown)</h2>
-    <input type="text" id="tecladoInput" placeholder="Escribí algo" />
-    <p id="keyMsg"></p>
-  </div>
-
-  <!-- 3. MOUSE -->
-  <div class="seccion">
-    <h2>3. Evento de Mouse (mouseover / mouseout)</h2>
-    <div id="hoverBox" class="caja">Pasa el mouse por aquí</div>
-  </div>
-
-  <!-- 4. TRIGGER -->
-  <div class="seccion">
-    <h2>4. Trigger + preventDefault</h2>
-    <a href="https://google.com" id="enlace">Ir a Google</a>
-    <p id="linkMsg"></p>
-  </div>
-
-  <!-- 5. PROPAGACIÓN -->
-  <div class="seccion">
-    <h2>5. Propagación de Eventos</h2>
-    <div id="abuelo" class="caja">
-      Abuelo
-      <div id="padre" class="caja" style="margin:10px;">
-        Padre
-        <div id="hijo" class="caja" style="margin:10px;">Hijo</div>
-      </div>
-    </div>
-    <p id="bubblingMsg"></p>
-  </div>
-
-  <!-- JavaScript -->
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
