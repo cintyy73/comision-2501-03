@@ -194,3 +194,203 @@ Los componentes pueden personalizarse modificando las variables CSS o ajustando 
 
 ---
 
+---
+
+## Teoría Básica: Bucles `for` en JavaScript
+
+### 1. Bucle `for` Tradicional
+
+El bucle `for` clásico es la estructura de repetición más común y versátil en JavaScript.
+
+**Sintaxis:**
+```javascript
+for (inicialización; condición; actualización) {
+    // Código a ejecutar
+}
+```
+
+**Ejemplo:**
+```javascript
+// Contar del 1 al 5
+for (let i = 1; i <= 5; i++) {
+    console.log(i); // Muestra: 1, 2, 3, 4, 5
+}
+
+// Recorrer un array
+const frutas = ['manzana', 'banana', 'naranja'];
+for (let i = 0; i < frutas.length; i++) {
+    console.log(frutas[i]);
+}
+```
+
+**Casos de uso:**
+- Cuando necesitas el índice del elemento
+- Para iterar un número específico de veces
+- Cuando necesitas control total sobre la iteración
+
+### 2. Bucle `forEach`
+
+El método `forEach` es específico para arrays y ejecuta una función para cada elemento del array.
+
+**Sintaxis:**
+```javascript
+array.forEach((elemento, índice, arrayCompleto) => {
+    // Código a ejecutar
+});
+```
+
+**Ejemplos:**
+```javascript
+const colores = ['rojo', 'verde', 'azul'];
+
+// Forma básica
+colores.forEach(color => {
+    console.log(color);
+});
+
+// Con índice
+colores.forEach((color, index) => {
+    console.log(`${index}: ${color}`);
+});
+
+// Ejemplo práctico: agregar clase CSS a elementos
+const botones = document.querySelectorAll('.btn');
+botones.forEach(boton => {
+    boton.addEventListener('click', () => {
+        console.log('Botón clickeado');
+    });
+});
+```
+
+**Características importantes:**
+- No puede usar `break` o `continue`
+- No retorna un nuevo array
+- Ideal para efectos secundarios (modificar DOM, hacer peticiones, etc.)
+
+### 3. Bucle `for...of`
+
+El bucle `for...of` itera sobre valores de objetos iterables (arrays, strings, NodeLists, etc.).
+
+**Sintaxis:**
+```javascript
+for (const elemento of iterable) {
+    // Código a ejecutar
+}
+```
+
+**Ejemplos:**
+```javascript
+// Con arrays
+const numeros = [10, 20, 30];
+for (const numero of numeros) {
+    console.log(numero); // 10, 20, 30
+}
+
+// Con strings
+const palabra = "Hola";
+for (const letra of palabra) {
+    console.log(letra); // H, o, l, a
+}
+
+// Con NodeList (elementos del DOM)
+const elementos = document.querySelectorAll('.item');
+for (const elemento of elementos) {
+    elemento.style.color = 'blue';
+}
+
+// Con destructuring
+const personas = [
+    ['Juan', 25],
+    ['María', 30],
+    ['Carlos', 28]
+];
+
+for (const [nombre, edad] of personas) {
+    console.log(`${nombre} tiene ${edad} años`);
+}
+```
+
+**Ventajas:**
+- Sintaxis más limpia que el for tradicional
+- Funciona con cualquier objeto iterable
+- Permite usar `break` y `continue`
+
+### 4. Bucle `for...in`
+
+El bucle `for...in` itera sobre las propiedades enumerables de un objeto.
+
+**Sintaxis:**
+```javascript
+for (const propiedad in objeto) {
+    // Código a ejecutar
+}
+```
+
+**Ejemplos:**
+```javascript
+// Con objetos
+const persona = {
+    nombre: 'Ana',
+    edad: 25,
+    ciudad: 'Madrid'
+};
+
+for (const propiedad in persona) {
+    console.log(`${propiedad}: ${persona[propiedad]}`);
+}
+// Resultado:
+// nombre: Ana
+// edad: 25
+// ciudad: Madrid
+
+// Con arrays (no recomendado, usa for...of)
+const frutas = ['manzana', 'banana'];
+for (const indice in frutas) {
+    console.log(indice); // "0", "1" (como strings)
+}
+```
+
+**Nota importante:** `for...in` itera sobre índices como strings en arrays, no sobre valores.
+
+### Comparación y Cuándo Usar Cada Uno
+
+| Bucle | Uso Principal | Ventajas | Desventajas |
+|-------|---------------|----------|-------------|
+| `for` | Control preciso, índices | Máximo control, funciona con todo | Más verboso |
+| `forEach` | Arrays, efectos secundarios | Limpio, funcional | No permite break/continue |
+| `for...of` | Valores de iterables | Limpio, flexible | Solo para iterables |
+| `for...in` | Propiedades de objetos | Bueno para objetos | Confuso con arrays |
+
+### Ejemplos Prácticos en Componentes Web
+
+```javascript
+// Inicializar múltiples componentes con forEach
+const botones = document.querySelectorAll('.toggle-btn');
+botones.forEach(boton => {
+    boton.addEventListener('click', toggleContent);
+});
+
+// Crear elementos dinámicamente con for...of
+const menuItems = ['Inicio', 'Acerca de', 'Contacto'];
+const nav = document.querySelector('nav');
+
+for (const item of menuItems) {
+    const enlace = document.createElement('a');
+    enlace.textContent = item;
+    enlace.href = `#${item.toLowerCase()}`;
+    nav.appendChild(enlace);
+}
+
+// Validar formulario con for...in
+const campos = {
+    nombre: document.querySelector('#nombre').value,
+    email: document.querySelector('#email').value,
+    mensaje: document.querySelector('#mensaje').value
+};
+
+for (const campo in campos) {
+    if (!campos[campo]) {
+        console.log(`El campo ${campo} es requerido`);
+    }
+}
+```

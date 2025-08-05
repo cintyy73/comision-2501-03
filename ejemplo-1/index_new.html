@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- ========================================
+         TECHSTORE - TIENDA ONLINE
+         Ejemplo de componentes web interactivos
+         ======================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechStore - Tienda online de tecnología con componentes web interactivos">
+    <meta name="keywords" content="tecnología, smartphones, laptops, accesorios, tienda online">
+    <meta name="author" content="TechStore Team">
+    
+    <title>🛒 TechStore - Tienda Online de Tecnología</title>
+    
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+<body>
+    <!-- ========================================
+         BOTÓN DE MENÚ HAMBURGUESA
+         Controla la apertura/cierre del sidebar
+         ======================================== -->
+    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Abrir menú de navegación">
+        ☰ Menú
+    </button>
+
+    <!-- ========================================
+         CONTENEDOR PRINCIPAL
+         Estructura principal de la aplicación
+         ======================================== -->
+    <div class="container">
+        <!-- === HEADER CON BRANDING === -->
+        <header class="header">
+            <h1>🛒 TechStore - Tienda Online</h1>
+            <p>Descubre la última tecnología con componentes web interactivos</p>
+        </header>
+
+        <!-- === CONTENIDO PRINCIPAL === -->
+        <main class="main-content">
+            <!-- ========================================
+                 COMPONENTE SIDEBAR
+                 Panel de navegación lateral con categorías
+                 ======================================== -->
+            <nav class="sidebar" id="sidebar" role="navigation" aria-label="Navegación principal">
+                <div class="sidebar-header">
+                    <h3>🛒 Categorías</h3>
+                </div>
+                <ul class="sidebar-nav">
+                    <li><a href="#collapse-demo">💻 Productos</a></li>
+                    <li><a href="#modal-demo">🛍️ Carrito</a></li>
+                    <li><a href="#toggle-demo">⚙️ Configuración</a></li>
+                    <li><a href="#about">📞 Soporte</a></li>
+                    <li><a href="#contact">👤 Mi Cuenta</a></li>
+                </ul>
+            </nav>
+
+            <!-- === ÁREA DE CONTENIDO PRINCIPAL === -->
+            <div class="content">
+                <!-- ========================================
+                     DEMOSTRACIÓN DEL COMPONENTE COLLAPSE
+                     Organización de productos por categorías
+                     ======================================== -->
+                <section class="demo-section" id="collapse-demo">
+                    <h3>💻 Catálogo de Productos</h3>
+                    <p><strong>Componente Collapse:</strong> Organiza productos por categorías para facilitar la navegación del cliente.</p>
+                    <p><strong>Caso de uso real:</strong> Los usuarios pueden expandir solo las categorías que les interesan, optimizando el espacio y mejorando la experiencia de compra.</p>
+
+                    <!-- Categoría: Laptops -->
+                    <div class="collapse-container">
+                        <div class="collapse-header" onclick="toggleCollapse('laptops')" role="button" aria-expanded="false" tabindex="0">
+                            <span>💻 Laptops (12 productos disponibles)</span>
+                            <span class="collapse-icon">▼</span>
+                        </div>
+                        <div class="collapse-content" id="laptops">
+                            <div class="collapse-body">
+                                <h4>💻 Laptops Más Populares</h4>
+                                <div class="product-grid">
+                                    <!-- Producto 1 -->
+                                    <div class="product-card">
+                                        <div class="product-image">💻</div>
+                                        <h5>MacBook Pro M3</h5>
+                                        <p style="color: #666; font-size: 14px;">Procesador M3, 16GB RAM</p>
+                                        <p style="font-weight: bold; color: #27ae60; font-size: 18px;">$2,499.00</p>
+                                        <button class="btn btn-primary" onclick="viewProduct('macbook-pro')">Ver Detalles</button>
+                                    </div>
+                                    <!-- Producto 2 -->
+                                    <div class="product-card">
+                                        <div class="product-image">🖥️</div>
+                                        <h5>Dell XPS 13</h5>
+                                        <p style="color: #666; font-size: 14px;">Intel i7, 16GB RAM, SSD 512GB</p>
+                                        <p style="font-weight: bold; color: #27ae60; font-size: 18px;">$1,299.00</p>
+                                        <button class="btn btn-primary" onclick="viewProduct('dell-xps')">Ver Detalles</button>
+                                    </div>
+                                    <!-- Producto 3 -->
+                                    <div class="product-card">
+                                        <div class="product-image">🎮</div>
+                                        <h5>ASUS ROG Gaming</h5>
+                                        <p style="color: #666; font-size: 14px;">RTX 4070, 32GB RAM</p>
+                                        <p style="font-weight: bold; color: #27ae60; font-size: 18px;">$1,899.00</p>
+                                        <button class="btn btn-primary" onclick="viewProduct('asus-rog')">Ver Detalles</button>
+                                    </div>
+                                </div>
+                                <div class="success-box">
+                                    <strong>✅ Beneficio:</strong> Envío gratis en pedidos mayores a $1,000 + garantía extendida incluida
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Smartphones -->
+                    <div class="collapse-container">
+                        <div class="collapse-header" onclick="toggleCollapse('smartphones')" role="button" aria-expanded="false" tabindex="0">
+                            <span>📱 Smartphones (18 productos disponibles)</span>
+                            <span class="collapse-icon">▼</span>
+                        </div>
+                        <div class="collapse-content" id="smartphones">
+                            <div class="collapse-body">
+                                <h4>📱 Smartphones Más Vendidos</h4>
+                                <div class="product-grid">
+                                    <!-- Smartphone 1 -->
+                                    <div class="product-card">
+                                        <div class="product-image">📱</div>
+                                        <h5>iPhone 15 Pro</h5>
+                                        <p style="color: #666; font-size: 14px;">128GB, Titanio Natural</p>
+                                        <span class="badge badge-hot">🔥 Más vendido</span>
+                                        <p style="font-weight: bold; color: #27ae60; font-size: 18px; margin-top: 8px;">$1,199.00</p>
+                                        <button class="btn btn-success" onclick="addToCart(1, 'iPhone 15 Pro', 1199)">Agregar al Carrito</button>
+                                    </div>
+                                    <!-- Smartphone 2 -->
+                                    <div class="product-card">
+                                        <div class="product-image">📱</div>
+                                        <h5>Samsung Galaxy S24</h5>
+                                        <p style="color: #666; font-size: 14px;">256GB, Phantom Black</p>
+                                        <span class="badge badge-offer">⭐ Oferta especial</span>
+                                        <p style="font-weight: bold; color: #27ae60; font-size: 18px; margin-top: 8px;">$999.00</p>
+                                        <button class="btn btn-success" onclick="addToCart(2, 'Samsung Galaxy S24', 999)">Agregar al Carrito</button>
+                                    </div>
+                                </div>
+                                <div class="highlight-box">
+                                    <strong>🎁 Promoción especial:</strong> Compra 2 smartphones y obtén 15% de descuento automático en todos los accesorios de la tienda
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Accesorios -->
+                    <div class="collapse-container">
+                        <div class="collapse-header" onclick="toggleCollapse('accessories')" role="button" aria-expanded="false" tabindex="0">
+                            <span>🎧 Accesorios (25+ productos disponibles)</span>
+                            <span class="collapse-icon">▼</span>
+                        </div>
+                        <div class="collapse-content" id="accessories">
+                            <div class="collapse-body">
+                                <h4>🎧 Accesorios Tecnológicos Premium</h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 20px 0;">
+                                    <!-- Accesorio 1 -->
+                                    <div class="product-card">
+                                        <div class="product-image" style="height: 80px; font-size: 2rem;">🎧</div>
+                                        <h6 style="margin: 10px 0 5px;">AirPods Pro 2</h6>
+                                        <p style="color: #666; font-size: 12px;">Cancelación de ruido activa</p>
+                                        <p style="font-weight: bold; color: #27ae60;">$249.00</p>
+                                        <button class="btn btn-success" style="font-size: 11px; padding: 5px 10px;" onclick="addToCart(3, 'AirPods Pro 2', 249)">Agregar</button>
+                                    </div>
+                                    <!-- Accesorio 2 -->
+                                    <div class="product-card">
+                                        <div class="product-image" style="height: 80px; font-size: 2rem;">🔌</div>
+                                        <h6 style="margin: 10px 0 5px;">Cargador Rápido USB-C</h6>
+                                        <p style="color: #666; font-size: 12px;">65W, cable incluido</p>
+                                        <p style="font-weight: bold; color: #27ae60;">$29.99</p>
+                                        <button class="btn btn-success" style="font-size: 11px; padding: 5px 10px;" onclick="addToCart(4, 'Cargador Rápido', 29.99)">Agregar</button>
+                                    </div>
+                                    <!-- Accesorio 3 -->
+                                    <div class="product-card">
+                                        <div class="product-image" style="height: 80px; font-size: 2rem;">🖱️</div>
+                                        <h6 style="margin: 10px 0 5px;">Mouse Gaming RGB</h6>
+                                        <p style="color: #666; font-size: 12px;">12000 DPI, ergonómico</p>
+                                        <p style="font-weight: bold; color: #27ae60;">$79.99</p>
+                                        <button class="btn btn-success" style="font-size: 11px; padding: 5px 10px;" onclick="addToCart(5, 'Mouse Gaming', 79.99)">Agregar</button>
+                                    </div>
+                                </div>
+                                <div class="info-box">
+                                    <strong>💡 Información:</strong> Todos los accesorios incluyen garantía de 2 años y soporte técnico gratuito
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================
+                     DEMOSTRACIÓN DEL COMPONENTE MODAL
+                     Sistema de carrito y checkout
+                     ======================================== -->
+                <section class="demo-section" id="modal-demo">
+                    <h3>🛍️ Sistema de Carrito de Compras</h3>
+                    <p><strong>Componente Modal:</strong> Ventanas emergentes para gestionar el carrito, mostrar detalles de productos y procesar el checkout.</p>
+                    <p><strong>Caso de uso real:</strong> Los modales permiten a los usuarios revisar compras, ver especificaciones detalladas y completar transacciones sin abandonar la página de navegación.</p>
+
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 25px;">
+                        <!-- Botón del carrito con contador dinámico -->
+                        <button class="btn btn-primary" onclick="openModal('cartModal')" aria-label="Abrir carrito de compras">
+                            🛒 Ver Carrito (<span id="cart-count">3</span> productos)
+                        </button>
+                        <!-- Botón para ver detalles del producto destacado -->
+                        <button class="btn btn-success" onclick="openModal('productModal')" aria-label="Ver detalles del iPhone 15 Pro">
+                            📱 Detalles: iPhone 15 Pro
+                        </button>
+                        <!-- Botón para ir al checkout -->
+                        <button class="btn btn-warning" onclick="openModal('checkoutModal')" aria-label="Proceder al checkout">
+                            💳 Checkout Rápido
+                        </button>
+                    </div>
+
+                    <div class="info-box" style="margin-top: 20px;">
+                        <strong>🔒 Compra Segura:</strong> Procesamiento encriptado SSL, múltiples métodos de pago y protección al comprador garantizada
+                    </div>
+                </section>
+
+                <!-- ========================================
+                     DEMOSTRACIÓN DEL COMPONENTE TOGGLE
+                     Configuración de preferencias de usuario
+                     ======================================== -->
+                <section class="demo-section" id="toggle-demo">
+                    <h3>⚙️ Centro de Configuración de Cuenta</h3>
+                    <p><strong>Componente Toggle:</strong> Interruptores intuitivos para personalizar la experiencia de compra del usuario.</p>
+                    <p><strong>Caso de uso real:</strong> Los clientes pueden activar/desactivar notificaciones, ofertas, recomendaciones y configuraciones de seguridad según sus preferencias personales.</p>
+
+                    <!-- Configuración 1: Notificaciones de ofertas -->
+                    <div class="toggle-setting">
+                        <span style="flex: 1;">
+                            <strong>🔔 Notificaciones de Ofertas Personalizadas</strong>
+                            <br><small style="color: #666;">Recibe alertas instantáneas cuando haya descuentos en tus productos favoritos y categorías de interés</small>
+                        </span>
+                        <div class="toggle-switch" onclick="toggleSwitch(this)" role="switch" aria-checked="false" tabindex="0">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span id="toggle-status-1" style="min-width: 90px; font-weight: bold; color: #e74c3c;">Desactivado</span>
+                    </div>
+
+                    <!-- Configuración 2: Newsletter -->
+                    <div class="toggle-setting">
+                        <span style="flex: 1;">
+                            <strong>📧 Newsletter Semanal TechStore</strong>
+                            <br><small style="color: #666;">Contenido exclusivo: lanzamientos, reseñas profesionales, guías de compra y tips tecnológicos</small>
+                        </span>
+                        <div class="toggle-switch" onclick="toggleSwitch(this)" role="switch" aria-checked="false" tabindex="0">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span id="toggle-status-2" style="min-width: 90px; font-weight: bold; color: #e74c3c;">Desactivado</span>
+                    </div>
+
+                    <!-- Configuración 3: Recomendaciones (activada por defecto) -->
+                    <div class="toggle-setting">
+                        <span style="flex: 1;">
+                            <strong>🎯 Sistema de Recomendaciones Inteligente</strong>
+                            <br><small style="color: #666;">Algoritmo IA que analiza tu historial de compras para sugerir productos relevantes y compatibles</small>
+                        </span>
+                        <div class="toggle-switch active" onclick="toggleSwitch(this)" role="switch" aria-checked="true" tabindex="0">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span id="toggle-status-3" style="min-width: 90px; font-weight: bold; color: #27ae60;">Activado</span>
+                    </div>
+
+                    <!-- Configuración 4: Autenticación de dos factores -->
+                    <div class="toggle-setting">
+                        <span style="flex: 1;">
+                            <strong>🔒 Autenticación de Dos Factores (2FA)</strong>
+                            <br><small style="color: #666;">Protección avanzada para tu cuenta, métodos de pago y datos personales mediante verificación SMS/Email</small>
+                        </span>
+                        <div class="toggle-switch" onclick="toggleSwitch(this)" role="switch" aria-checked="false" tabindex="0">
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span id="toggle-status-4" style="min-width: 90px; font-weight: bold; color: #e74c3c;">Desactivado</span>
+                    </div>
+
+                    <!-- Recomendación de seguridad -->
+                    <div class="highlight-box">
+                        <strong>💡 Recomendación de Seguridad:</strong> Para máxima protección de tu cuenta y transacciones, te sugerimos activar la autenticación de dos factores. Es gratuita y toma menos de 2 minutos configurarla.
+                    </div>
+                </section>
+
+                <!-- ========================================
+                     INFORMACIÓN ADICIONAL Y SOPORTE
+                     ======================================== -->
+                <section class="demo-section" id="about">
+                    <h3>📞 Soporte al Cliente y Información de la Tienda</h3>
+                    <p>En TechStore, estos componentes web mejoran significativamente tu experiencia de compra:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0;">
+                        <!-- Beneficio 1 -->
+                        <div style="padding: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 8px; border-left: 4px solid #2196f3;">
+                            <h4 style="color: #1976d2; margin-bottom: 10px;">🚀 Navegación Intuitiva</h4>
+                            <p style="color: #666; font-size: 14px;">El sidebar te permite explorar categorías de productos de manera rápida y eficiente, ahorrando tiempo en tu búsqueda.</p>
+                        </div>
+                        
+                        <!-- Beneficio 2 -->
+                        <div style="padding: 20px; background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <h4 style="color: #388e3c; margin-bottom: 10px;">💡 Compras Eficientes</h4>
+                            <p style="color: #666; font-size: 14px;">Los modales muestran información detallada sin interrumpir tu navegación, manteniendo el contexto de compra.</p>
+                        </div>
+                        
+                        <!-- Beneficio 3 -->
+                        <div style="padding: 20px; background: linear-gradient(135deg, #fff3e0 0%, #ffcc82 100%); border-radius: 8px; border-left: 4px solid #ff9800;">
+                            <h4 style="color: #f57c00; margin-bottom: 10px;">📂 Organización Clara</h4>
+                            <p style="color: #666; font-size: 14px;">Los componentes collapse organizan miles de productos en categorías manejables y fáciles de navegar.</p>
+                        </div>
+                        
+                        <!-- Beneficio 4 -->
+                        <div style="padding: 20px; background: linear-gradient(135deg, #f3e5f5 0%, #ce93d8 100%); border-radius: 8px; border-left: 4px solid #9c27b0;">
+                            <h4 style="color: #7b1fa2; margin-bottom: 10px;">⚙️ Personalización Total</h4>
+                            <p style="color: #666; font-size: 14px;">Los toggles permiten configurar tu experiencia de compra exactamente como prefieres, con preferencias que se guardan.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Información sobre TechStore -->
+                    <div class="info-box">
+                        <h4>🏪 Sobre TechStore - Tu Socio Tecnológico de Confianza</h4>
+                        <p style="margin: 15px 0;">Somos líderes en retail tecnológico con más de 10 años de experiencia sirviendo a clientes satisfechos. Nuestra misión es democratizar el acceso a la tecnología más avanzada.</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                            <div>
+                                <strong>✅ Garantía Extendida</strong>
+                                <p style="font-size: 13px; color: #666; margin: 5px 0;">Hasta 3 años en todos los productos</p>
+                            </div>
+                            <div>
+                                <strong>✅ Envío Express Gratis</strong>
+                                <p style="font-size: 13px; color: #666; margin: 5px 0;">En compras mayores a $500</p>
+                            </div>
+                            <div>
+                                <strong>✅ Soporte Técnico 24/7</strong>
+                                <p style="font-size: 13px; color: #666; margin: 5px 0;">Chat, teléfono y email</p>
+                            </div>
+                            <div>
+                                <strong>✅ Programa VIP</strong>
+                                <p style="font-size: 13px; color: #666; margin: 5px 0;">Descuentos exclusivos y acceso anticipado</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========================================
+         MODALES DEL SISTEMA
+         Ventanas emergentes para diferentes funciones
+         ======================================== -->
+    
+    <!-- Modal del Carrito de Compras -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>🛒 Tu Carrito de Compras</h3>
+                <button class="close-btn" onclick="closeModal('cartModal')" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Producto 1 en el carrito -->
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">📱</div>
+                        <div style="flex: 1;">
+                            <h5 style="margin: 0;">iPhone 15 Pro</h5>
+                            <p style="color: #666; margin: 5px 0;">Color: Titanio Natural, 128GB</p>
+                            <p style="font-weight: bold; color: #27ae60;">$1,199.00</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="updateQuantity(1, -1)">-</button>
+                            <span style="font-weight: bold; min-width: 20px; text-align: center;">1</span>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="updateQuantity(1, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Producto 2 en el carrito -->
+                <div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #56ab2f, #a8e6cf); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">🎧</div>
+                        <div style="flex: 1;">
+                            <h5 style="margin: 0;">AirPods Pro 2</h5>
+                            <p style="color: #666; margin: 5px 0;">Con cancelación de ruido activa</p>
+                            <p style="font-weight: bold; color: #27ae60;">$249.00</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="updateQuantity(2, -1)">-</button>
+                            <span style="font-weight: bold; min-width: 20px; text-align: center;">2</span>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="updateQuantity(2, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen de la compra -->
+                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Subtotal:</span>
+                        <span style="font-weight: bold;">$1,697.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Envío:</span>
+                        <span style="color: #27ae60; font-weight: bold;">GRATIS ✅</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Impuestos estimados:</span>
+                        <span>$135.76</span>
+                    </div>
+                    <hr style="margin: 15px 0; border: none; height: 1px; background: #dee2e6;">
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #27ae60;">
+                        <span>Total:</span>
+                        <span>$1,832.76</span>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <strong>🎉 ¡Felicidades!</strong> Tu pedido califica para envío gratis y garantía extendida
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('cartModal')">Seguir Comprando</button>
+                <button class="btn btn-primary" onclick="openModal('checkoutModal'); closeModal('cartModal')">Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalles del Producto -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>📱 iPhone 15 Pro - Especificaciones Completas</h3>
+                <button class="close-btn" onclick="closeModal('productModal')" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Imagen del producto con gradiente -->
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <div style="width: 200px; height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 auto; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">📱</div>
+                </div>
+                
+                <!-- Especificaciones técnicas -->
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">🔧 Especificaciones Técnicas</h4>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div>
+                            <strong>📱 Pantalla:</strong><br>
+                            <span style="color: #666;">6.1" Super Retina XDR OLED</span>
+                        </div>
+                        <div>
+                            <strong>⚡ Procesador:</strong><br>
+                            <span style="color: #666;">Chip A17 Pro (3nm)</span>
+                        </div>
+                        <div>
+                            <strong>💾 Almacenamiento:</strong><br>
+                            <span style="color: #666;">128GB / 256GB / 512GB / 1TB</span>
+                        </div>
+                        <div>
+                            <strong>📸 Cámara:</strong><br>
+                            <span style="color: #666;">Sistema triple de 48MP + Ultra Gran Angular + Teleobjetivo</span>
+                        </div>
+                        <div>
+                            <strong>🔋 Batería:</strong><br>
+                            <span style="color: #666;">Hasta 23 horas de video</span>
+                        </div>
+                        <div>
+                            <strong>🌐 Conectividad:</strong><br>
+                            <span style="color: #666;">5G, Wi-Fi 6E, Bluetooth 5.3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lo que incluye en la caja -->
+                <h4 style="color: #2c3e50; margin: 20px 0 15px;">📦 Contenido de la Caja</h4>
+                <div class="info-box">
+                    <ul style="margin: 0; list-style: none; padding: 0;">
+                        <li style="padding: 5px 0;">📱 iPhone 15 Pro</li>
+                        <li style="padding: 5px 0;">🔌 Cable USB-C a USB-C (1 metro)</li>
+                        <li style="padding: 5px 0;">📖 Documentación y guía rápida</li>
+                        <li style="padding: 5px 0;">🍎 Pegatina de Apple</li>
+                        <li style="padding: 5px 0;">📄 Información de garantía</li>
+                    </ul>
+                </div>
+
+                <!-- Garantía y servicio -->
+                <div class="success-box">
+                    <strong>✅ Garantía y Servicio:</strong><br>
+                    • 1 año de garantía limitada de Apple<br>
+                    • Opción de AppleCare+ disponible<br>
+                    • Soporte técnico gratuito durante 90 días<br>
+                    • Servicio de configuración sin costo adicional
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('productModal')">Cerrar</button>
+                <button class="btn btn-success" onclick="addToCart(1, 'iPhone 15 Pro', 1199); closeModal('productModal')">
+                    Agregar al Carrito - $1,199.00
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>💳 Finalizar Compra Segura</h3>
+                <button class="close-btn" onclick="closeModal('checkoutModal')" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <!-- Información de envío -->
+                    <h4 style="color: #2c3e50; margin-bottom: 15px;">📦 Información de Envío</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div class="form-group">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" class="form-input" placeholder="Juan" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Apellido:</label>
+                            <input type="text" class="form-input" placeholder="Pérez" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-input" placeholder="juan.perez@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Dirección completa:</label>
+                        <input type="text" class="form-input" placeholder="Av. Principal 123, Apartamento 4B" required>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div class="form-group">
+                            <label class="form-label">Ciudad:</label>
+                            <input type="text" class="form-input" placeholder="Ciudad" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Código Postal:</label>
+                            <input type="text" class="form-input" placeholder="12345" required>
+                        </div>
+                    </div>
+
+                    <!-- Método de pago -->
+                    <h4 style="color: #2c3e50; margin: 25px 0 15px;">💳 Método de Pago</h4>
+                    <div style="margin: 15px 0;">
+                        <label style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="selectPayment(this)">
+                            <input type="radio" name="payment" value="card" checked>
+                            <div style="font-size: 1.5rem;">💳</div>
+                            <div>
+                                <strong>Tarjeta de Crédito/Débito</strong>
+                                <br><small style="color: #666;">Visa, Mastercard, American Express</small>
+                            </div>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="selectPayment(this)">
+                            <input type="radio" name="payment" value="paypal">
+                            <div style="font-size: 1.5rem;">🅿️</div>
+                            <div>
+                                <strong>PayPal</strong>
+                                <br><small style="color: #666;">Pago rápido y seguro con tu cuenta PayPal</small>
+                            </div>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 15px; border: 2px solid #e1e8ed; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onclick="selectPayment(this)">
+                            <input type="radio" name="payment" value="transfer">
+                            <div style="font-size: 1.5rem;">🏦</div>
+                            <div>
+                                <strong>Transferencia Bancaria</strong>
+                                <br><small style="color: #666;">Procesamiento en 1-2 días hábiles</small>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Resumen del pedido -->
+                    <div class="highlight-box">
+                        <h4 style="margin: 0 0 15px; color: #f57c00;">📋 Resumen del Pedido</h4>
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #27ae60;">
+                            <span>Total a Pagar:</span>
+                            <span>$1,832.76</span>
+                        </div>
+                        <small style="color: #666; margin-top: 10px; display: block;">
+                            Incluye impuestos y envío. Los cargos aparecerán como "TechStore" en tu estado de cuenta.
+                        </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('checkoutModal')">Volver al Carrito</button>
+                <button class="btn btn-success" onclick="processCheckout()">
+                    🔒 Confirmar Compra Segura
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
