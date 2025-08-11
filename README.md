@@ -1,85 +1,39 @@
-# 📚 Guía de Repaso: Arrays y Loops
+# Guía de Ejercicios para Practicar Métodos de Array y Loops
 
-## ✨ ¿Qué incluye este repaso?
+A continuación tienes una serie de ejercicios para practicar los métodos de array y los loops en JavaScript. Puedes resolverlos usando los ejemplos del archivo `repaso-arrays-y-loops-consola.js` como referencia.
 
-### 🔄 **Loops FOR**
-- `for` básico (con índices)
-- `for...of` (para valores directos)
-- `for...in` (para índices/propiedades)
+## Ejercicios
 
-### 🛠️ **Métodos de Array**
-- `forEach()` - Ejecutar acción para cada elemento
-- `map()` - Transformar elementos
-- `filter()` - Filtrar elementos
-- `find()` - Encontrar un elemento
-- `some()` y `every()` - Verificar condiciones
-- `reduce()` - Reducir a un valor
-- `sort()` - Ordenar elementos
+1. **Crear un array de productos**
+   - Cada producto debe tener nombre, precio y categoría.
 
-## 🚀 Cómo usar este repaso
+2. **Filtrar productos por categoría**
+   - Crea una función que devuelva solo los productos de una categoría específica.
 
-1. **Abre el archivo HTML**: `repaso-arrays-y-loops.html`
-2. **Ejecuta cada ejemplo**: Haz clic en los botones para ver los resultados
-3. **Revisa la consola**: Usa F12 para ver logs detallados
-4. **Practica**: Modifica el código y experimenta
+3. **Calcular el precio total usando reduce**
+   - Suma todos los precios de los productos usando el método `reduce`.
 
-## 💡 Conceptos clave para recordar
+4. **Encontrar el producto más caro**
+   - Usa `reduce` o `find` para obtener el producto con mayor precio.
 
-| Método | ¿Qué hace? | ¿Retorna? |
-|--------|------------|-----------|
-| `forEach` | Ejecuta función para cada elemento | `undefined` |
-| `map` | Transforma cada elemento | Nuevo array |
-| `filter` | Filtra elementos que cumplan condición | Nuevo array |
-| `find` | Encuentra primer elemento que cumpla condición | Un elemento o `undefined` |
-| `reduce` | Combina todos los elementos | Un valor |
-| `some` | ¿Al menos uno cumple la condición? | `boolean` |
-| `every` | ¿Todos cumplen la condición? | `boolean` |
-| `sort` | Ordena elementos | Array modificado |
+5. **Crear una lista de nombres de productos en mayúscula**
+   - Usa `map` para transformar los nombres de los productos a mayúscula.
 
-## 🎯 Ejercicios adicionales
+6. **Verificar si hay productos con precio mayor a 1000**
+   - Usa `some` para saber si existe al menos un producto con precio mayor a 1000.
 
-### Datos para practicar:
-```javascript
-const productos = [
-    { nombre: "Laptop", precio: 80000, categoria: "Tecnología" },
-    { nombre: "Mouse", precio: 2500, categoria: "Tecnología" },
-    { nombre: "Escritorio", precio: 15000, categoria: "Muebles" },
-    { nombre: "Silla", precio: 8500, categoria: "Muebles" },
-    { nombre: "Monitor", precio: 25000, categoria: "Tecnología" }
-];
-```
+7. **Ordenar los productos por precio de mayor a menor**
+   - Usa `sort` para ordenar el array de productos por precio descendente.
 
-### Ejercicios:
-1. **Filtrar**: Productos de categoría "Tecnología"
-2. **Calcular**: Precio total de todos los productos
-3. **Encontrar**: El producto más caro
-4. **Transformar**: Lista de nombres en mayúscula
-5. **Verificar**: Si hay productos con precio > 30000
-6. **Ordenar**: Por precio (menor a mayor)
+8. **Contar cuántos productos hay por categoría**
+   - Usa `reduce` para crear un objeto que agrupe la cantidad de productos por categoría.
 
-## 🎓 Para las profesoras
+9. **Filtrar estudiantes aprobados**
+   - Usando el array de estudiantes, crea un array solo con los que tienen nota mayor o igual a 7.
 
-Este material cubre:
-- ✅ Sintaxis clara y ejemplos prácticos
-- ✅ Comparación entre diferentes enfoques
-- ✅ Casos de uso reales
-- ✅ Ejercicios progresivos
-- ✅ Consejos nemotécnicos
-- ✅ Datos realistas para practicar
-
-### Sugerencias didácticas:
-1. Empezar con los loops básicos
-2. Mostrar diferencias entre `for`, `for...of` y `for...in`
-3. Explicar cuándo usar cada método de array
-4. Enfatizar que algunos métodos modifican el array original y otros no
-5. Practicar con el ejercicio integrador
-
-## 🔧 Archivos incluidos
-
-- `repaso-arrays-y-loops.html` - Interfaz interactiva
-- `repaso-arrays-y-loops.js` - Código JavaScript con ejemplos
-- `README.md` - Esta guía
+10. **Calcular el promedio de notas de los estudiantes de Programación**
+    - Filtra los estudiantes de Programación y calcula su promedio de notas.
 
 ---
 
-*Creado para la Comisión 2501-03 - Clase 07*
+¡Resuelve estos ejercicios y prueba tus soluciones en la consola!
