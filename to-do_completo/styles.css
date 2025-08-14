@@ -1,0 +1,119 @@
+/* CSS básico para la lista de invitados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Filtros */
+.filtros {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.filtros h3 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.filtros button {
+    margin: 0 5px;
+    padding: 8px 15px;
+    background: #e9ecef;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.filtros button:hover {
+    background: #dee2e6;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input {
+    flex: 2;
+}
+
+select {
+    flex: 1;
+}
+
+button {
+    background: #ff69b4;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff1493;
+}
+
+/* Lista de invitados */
+.guest-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    border-left: 3px solid #ff69b4;
+}
+
+.guest-list-item button {
+    background: #dc3545;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.guest-list-item button:hover {
+    background: #c82333;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+    }
+    
+    .guest-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
