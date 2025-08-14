@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformaciones CSS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 40px;
+    }
+    
+    .seccion {
+      margin-bottom: 50px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .titulo-seccion {
+      color: #2266aa;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .explicacion {
+      margin-bottom: 20px;
+      color: #555;
+      font-size: 16px;
+    }
+    
+    .codigo {
+      background: #f8f8f8;
+      padding: 10px;
+      border-left: 4px solid #4caf50;
+      margin: 15px 0;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+    
+    .ejemplo-area {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    
+    .ejemplo {
+      width: 45%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .caja {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px auto;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: all 0.5s;
+    }
+    
+    .interactivo:hover {
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    /* Transformaciones */
+    .scale-x {
+      transform: scaleX(1.5);
+    }
+    
+    .scale-y {
+      transform: scaleY(1.5);
+    }
+    
+    .scale-xy {
+      transform: scale(1.5, 1.5);
+    }
+    
+    .skew-x {
+      transform: skewX(20deg);
+    }
+    
+    .skew-y {
+      transform: skewY(20deg);
+    }
+    
+    .skew-xy {
+      transform: skew(20deg, 10deg);
+    }
+    
+    .rotate {
+      transform: rotate(45deg);
+    }
+    
+    .translate-x {
+      transform: translateX(20px);
+    }
+    
+    .translate-y {
+      transform: translateY(20px);
+    }
+    
+    .translate-xy {
+      transform: translate(20px, 20px);
+    }
+    
+    .origin-tl {
+      transform: rotate(30deg);
+      transform-origin: top left;
+    }
+    
+    .origin-center {
+      transform: rotate(30deg);
+      transform-origin: center;
+    }
+    
+    .origin-br {
+      transform: rotate(30deg);
+      transform-origin: bottom right;
+    }
+    
+    .combined {
+      transform: rotate(15deg) scale(1.2) translateX(10px);
+    }
+    
+    .interactivo-scale:hover {
+      transform: scale(1.2);
+    }
+    
+    .interactivo-rotate:hover {
+      transform: rotate(15deg);
+    }
+    
+    .interactivo-skew:hover {
+      transform: skewX(15deg);
+    }
+    
+    .interactivo-translate:hover {
+      transform: translateY(-10px);
+    }
+  </style>
+</head>
+<body>
+  <h1>Transformaciones CSS</h1>
+  
+  <!-- Introducción -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">¿Qué es transform?</h2>
+    <div class="explicacion">
+      <p><strong>Transform</strong> es un módulo de CSS que permite manipular visualmente elementos HTML en un espacio bidimensional o tridimensional. Podemos inclinar, rotar, escalar y trasladar elementos sin afectar el flujo normal del documento.</p>
+      <p>La sintaxis básica es: <code>transform: función(valor);</code></p>
+    </div>
+  </div>
+  
+  <!-- Scale -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Scale (Escalar)</h2>
+    <div class="explicacion">
+      <p>La función <code>scale()</code> aumenta o disminuye el tamaño de un elemento. Podemos escalar en el eje X, en el eje Y, o en ambos.</p>
+      <div class="codigo">
+        transform: scaleX(1.5); /* Solo eje X */
+        transform: scaleY(1.5); /* Solo eje Y */
+        transform: scale(1.5);  /* Ambos ejes */
+        transform: scale(1.5, 1.2); /* Valores diferentes para X e Y */
+      </div>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja">Original</div>
+        <p>Sin transformación</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja scale-x">scaleX(1.5)</div>
+        <p>Solo anchura</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja scale-y">scaleY(1.5)</div>
+        <p>Solo altura</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja scale-xy">scale(1.5)</div>
+        <p>Ambos ejes</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Skew -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Skew (Sesgar)</h2>
+    <div class="explicacion">
+      <p>La función <code>skew()</code> inclina un elemento en los ejes X y/o Y. El valor se especifica en grados (deg).</p>
+      <div class="codigo">
+        transform: skewX(20deg); /* Solo eje X */
+        transform: skewY(20deg); /* Solo eje Y */
+        transform: skew(20deg, 10deg); /* Ambos ejes */
+      </div>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja">Original</div>
+        <p>Sin transformación</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja skew-x">skewX(20deg)</div>
+        <p>Sesgado horizontalmente</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja skew-y">skewY(20deg)</div>
+        <p>Sesgado verticalmente</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja skew-xy">skew(20deg, 10deg)</div>
+        <p>Sesgado en ambos ejes</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Rotate -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Rotate (Rotar)</h2>
+    <div class="explicacion">
+      <p>La función <code>rotate()</code> gira un elemento alrededor de un punto fijo. El valor se especifica en grados (deg).</p>
+      <div class="codigo">
+        transform: rotate(45deg); /* Rotación en sentido horario */
+        transform: rotate(-45deg); /* Rotación en sentido antihorario */
+      </div>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja">Original</div>
+        <p>Sin rotación</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja rotate">rotate(45deg)</div>
+        <p>Rotado 45 grados</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Translate -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Translate (Trasladar)</h2>
+    <div class="explicacion">
+      <p>La función <code>translate()</code> mueve un elemento desde su posición original. Podemos mover en el eje X, en el eje Y, o en ambos.</p>
+      <div class="codigo">
+        transform: translateX(20px); /* Solo eje X */
+        transform: translateY(20px); /* Solo eje Y */
+        transform: translate(20px, 20px); /* Ambos ejes */
+      </div>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja">Original</div>
+        <p>Sin traslación</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja translate-x">translateX(20px)</div>
+        <p>Traslación horizontal</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja translate-y">translateY(20px)</div>
+        <p>Traslación vertical</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja translate-xy">translate(20px, 20px)</div>
+        <p>Traslación en ambos ejes</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Transform Origin -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Transform Origin (Origen de transformación)</h2>
+    <div class="explicacion">
+      <p>La propiedad <code>transform-origin</code> define el punto desde donde se aplica la transformación. Por defecto es el centro del elemento.</p>
+      <div class="codigo">
+        transform-origin: top left; /* Esquina superior izquierda */
+        transform-origin: center; /* Centro (valor por defecto) */
+        transform-origin: bottom right; /* Esquina inferior derecha */
+        transform-origin: 20px 50px; /* Coordenadas específicas */
+      </div>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja origin-tl">top left</div>
+        <p>Origen: arriba izquierda</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja origin-center">center</div>
+        <p>Origen: centro</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja origin-br">bottom right</div>
+        <p>Origen: abajo derecha</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Transformaciones combinadas -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Transformaciones combinadas</h2>
+    <div class="explicacion">
+      <p>Podemos combinar varias transformaciones en una sola declaración. El orden importa: las transformaciones se aplican de derecha a izquierda.</p>
+      <div class="codigo">
+        transform: rotate(15deg) scale(1.2) translateX(10px);
+        /* Primero traslada, luego escala y finalmente rota */
+      </div>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja">Original</div>
+        <p>Sin transformación</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja combined">Combinada</div>
+        <p>rotate + scale + translate</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Ejemplos interactivos -->
+  <div class="seccion">
+    <h2 class="titulo-seccion">Ejemplos interactivos (hover)</h2>
+    <div class="explicacion">
+      <p>Las transformaciones son muy útiles para crear efectos interactivos. Coloca el cursor sobre los siguientes elementos:</p>
+    </div>
+    <div class="ejemplo-area">
+      <div class="ejemplo">
+        <div class="caja interactivo interactivo-scale">Scale</div>
+        <p>Hover para escalar</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja interactivo interactivo-rotate">Rotate</div>
+        <p>Hover para rotar</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja interactivo interactivo-skew">Skew</div>
+        <p>Hover para inclinar</p>
+      </div>
+      <div class="ejemplo">
+        <div class="caja interactivo interactivo-translate">Translate</div>
+        <p>Hover para elevar</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

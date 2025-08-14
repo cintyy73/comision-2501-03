@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  padding: 2em;
+}
+
+h1 {
+  color: #333;
+}
+
+.comentario {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  color: #555;
+  font-style: italic;
+}
+
+.box {
+  width: 150px;
+  height: 80px;
+  background: #4fc3f7;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.5s;
+}
+
+.original {
+  /* Sin transformación */
+}
+
+.rotada {
+  /* Rotar 20 grados */
+  transform: rotate(20deg);
+}
+
+.escalada {
+  /* Escalar 1.5x */
+  transform: scale(1.5);
+}
+
+.trasladada {
+  /* Mover 50px a la derecha */
+  transform: translateX(50px);
+}
+
+.combinada {
+  /* Rotar, escalar y trasladar */
+  transform: rotate(-15deg) scale(1.2) translateX(30px);
+}

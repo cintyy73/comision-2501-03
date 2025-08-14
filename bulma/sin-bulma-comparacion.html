@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+
+  <title>Sin Bulma - Comparación</title>
+
+  <!-- Font Awesome para íconos -->
+  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body>
+  <!-- HEADER Y HERO SECTION -->
+  <div class="hero">
+    <div class="container">
+      <nav class="hero-navbar">
+        <a class="hero-brand" href="#">
+          <span class="icon">
+            <i class="fas fa-code"></i>
+          </span>
+          <span>SinBulma</span>
+        </a>
+        <ul class="hero-menu">
+          <li><a href="#" class="active">Inicio</a></li>
+          <li><a href="#">Ejemplos</a></li>
+          <li><a href="#">Documentación</a></li>
+          <li>
+            <a href="#" class="button button-primary">
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Descargar</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="hero-content">
+        <h1>CSS Tradicional</h1>
+        <p class="subtitle">Ejemplos de componentes y utilidades sin framework</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <!-- EXPLICACIÓN INICIAL -->
+      <div class="content">
+        <h2>¿Por qué usar CSS tradicional?</h2>
+        <p>Este ejemplo muestra cómo se verían los mismos componentes usando CSS tradicional en lugar de un framework como Bulma. Requiere escribir mucho más CSS pero ofrece mayor flexibilidad y control.</p>
+        <div class="notification notification-warning-light">
+          <p class="text-size-5"><strong>Consideraciones del CSS tradicional:</strong></p>
+          <ul>
+            <li>Control total sobre cada aspecto del diseño</li>
+            <li>No dependencias externas</li>
+            <li>Curva de aprendizaje más empinada</li>
+            <li>Requiere más código y mantenimiento</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: SISTEMA DE COLUMNAS -->
+      <div class="block mt-6">
+        <h3>Sistema de Columnas</h3>
+        <p class="subtitle">CSS tradicional requiere crear tu propio sistema de cuadrícula</p>
+        
+        <!-- EJEMPLO DE COLUMNAS -->
+        <div class="box">
+          <div class="grid">
+            <div class="col" style="background-color: #3273dc; color: white; text-align: center; padding: 10px;">
+              <p>Columna 1</p>
+            </div>
+            <div class="col" style="background-color: #485fc7; color: white; text-align: center; padding: 10px;">
+              <p>Columna 2</p>
+            </div>
+            <div class="col" style="background-color: #3e8ed0; color: white; text-align: center; padding: 10px;">
+              <p>Columna 3</p>
+            </div>
+            <div class="col" style="background-color: #48c78e; color: white; text-align: center; padding: 10px;">
+              <p>Columna 4</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- EJEMPLO DE COLUMNAS CON TAMAÑOS -->
+        <div class="box">
+          <div class="grid">
+            <div class="col-quarter" style="background-color: #ebf5ff; text-align: center; padding: 10px;">
+              <p>25%</p>
+            </div>
+            <div class="col-half" style="background-color: #ebeeff; text-align: center; padding: 10px;">
+              <p>50%</p>
+            </div>
+            <div class="col-quarter" style="background-color: #ebf5ff; text-align: center; padding: 10px;">
+              <p>25%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: ELEMENTOS BÁSICOS -->
+      <div class="block mt-6">
+        <h3>Elementos Básicos</h3>
+        <p class="subtitle">CSS tradicional requiere estilizar manualmente cada componente</p>
+        
+        <!-- EJEMPLO DE BOTONES -->
+        <div class="box">
+          <h4>Botones</h4>
+          <div class="button-group">
+            <button class="button button-primary">Primary</button>
+            <button class="button button-link">Link</button>
+            <button class="button button-info">Info</button>
+            <button class="button button-success">Success</button>
+            <button class="button button-warning">Warning</button>
+            <button class="button button-danger">Danger</button>
+          </div>
+          
+          <h5 class="mt-4">Tamaños de botones</h5>
+          <div class="button-group">
+            <button class="button button-small">Small</button>
+            <button class="button">Normal</button>
+            <button class="button button-medium">Medium</button>
+            <button class="button button-large">Large</button>
+          </div>
+          
+          <h5 class="mt-4">Estilos de botones</h5>
+          <div class="button-group">
+            <button class="button button-outlined">Outlined</button>
+            <button class="button button-primary" style="background-color: white; color: #3273dc;">Inverted</button>
+            <button class="button button-primary button-rounded">Rounded</button>
+            <button class="button button-primary button-loading">Loading</button>
+          </div>
+        </div>
+        
+        <!-- EJEMPLO DE NOTIFICACIONES -->
+        <div class="box">
+          <h4>Notificaciones</h4>
+          <div class="notification notification-primary">
+            <button class="delete-button"></button>
+            Esta es una notificación primaria.
+          </div>
+          <div class="notification notification-danger">
+            <button class="delete-button"></button>
+            Esta es una notificación de error.
+          </div>
+          <div class="notification notification-warning-light">
+            <button class="delete-button"></button>
+            Esta es una notificación de advertencia con estilo light.
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: COMPONENTES -->
+      <div class="block mt-6">
+        <h3>Componentes</h3>
+        <p class="subtitle">Componentes más complejos requieren mucho más CSS personalizado</p>
+        
+        <!-- EJEMPLO DE CARDS -->
+        <h4>Tarjetas (Cards)</h4>
+        <div class="grid">
+          <div class="col-third">
+            <div class="card">
+              <div class="card-image">
+                <div class="image-4by3">
+                  <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </div>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <div class="image-48x48">
+                      <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                    </div>
+                  </div>
+                  <div class="media-content">
+                    <h4>Título de la tarjeta</h4>
+                    <p class="text-grey">@usuario</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                  <a href="#">#tag</a> <a href="#">#etiqueta</a>
+                  <br>
+                  <time datetime="2025-8-13">13 Ago 2025</time>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- EJEMPLO DE MENU -->
+          <div class="col-third">
+            <div class="menu">
+              <p class="menu-label">
+                General
+              </p>
+              <ul class="menu-list">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Clientes</a></li>
+              </ul>
+              <p class="menu-label">
+                Administración
+              </p>
+              <ul class="menu-list">
+                <li><a href="#">Configuración del equipo</a></li>
+                <li>
+                  <a href="#">Gestionar permisos</a>
+                  <ul>
+                    <li><a href="#">Miembros</a></li>
+                    <li><a href="#">Plugins</a></li>
+                    <li><a href="#">Agregar usuario</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Autenticación</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- EJEMPLO DE MENSAJE -->
+          <div class="col-third">
+            <div class="message message-success">
+              <div class="message-header">
+                <p>Mensaje de éxito</p>
+                <button class="delete-button" aria-label="delete"></button>
+              </div>
+              <div class="message-body">
+                Tu operación se ha completado con éxito. Puedes seguir trabajando normalmente.
+              </div>
+            </div>
+            
+            <div class="message message-warning">
+              <div class="message-header">
+                <p>Advertencia</p>
+                <button class="delete-button" aria-label="delete"></button>
+              </div>
+              <div class="message-body">
+                Tienes cambios sin guardar. Asegúrate de guardar antes de salir.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: HELPERS -->
+      <div class="block mt-6">
+        <h3>Utilidades</h3>
+        <p class="subtitle">Con CSS tradicional, cada utilidad debe ser creada manualmente</p>
+        
+        <div class="box">
+          <h4>Colores de texto y fondo</h4>
+          <p class="text-primary">Texto color primario</p>
+          <p class="text-danger">Texto color peligro</p>
+          <p class="text-grey">Texto color gris</p>
+          
+          <div class="block bg-warning p-4 mt-4">
+            <p>Bloque con fondo amarillo y padding</p>
+          </div>
+          
+          <div class="block bg-success-light p-4">
+            <p>Bloque con fondo verde claro y padding</p>
+          </div>
+        </div>
+        
+        <div class="box">
+          <h4>Tamaños y alineación de texto</h4>
+          <p class="text-size-1">Texto tamaño 1</p>
+          <p class="text-size-3">Texto tamaño 3</p>
+          <p class="text-size-5">Texto tamaño 5</p>
+          <p class="text-size-7">Texto tamaño 7</p>
+          
+          <p class="text-centered mt-4">Este texto está centrado</p>
+          <p class="text-right">Este texto está alineado a la derecha</p>
+          <p class="text-justified">Este texto está justificado. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+        </div>
+      </div>
+      
+      <!-- SECCIÓN: FORMULARIOS -->
+      <div class="block mt-6">
+        <h3>Formularios</h3>
+        <p class="subtitle">CSS tradicional requiere estilizar cada elemento de formulario</p>
+        
+        <div class="box">
+          <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Ingrese su nombre">
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left">
+              <input class="input input-success" type="email" placeholder="Email" value="ejemplo@email.com">
+              <span class="icon">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <p class="help help-success">Email es válido</p>
+          </div>
+          
+          <div class="field">
+            <label class="label">Asunto</label>
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option>Seleccione un asunto</option>
+                  <option>Consulta general</option>
+                  <option>Soporte técnico</option>
+                  <option>Facturación</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label">Mensaje</label>
+            <div class="control">
+              <textarea class="textarea" placeholder="Su mensaje aquí..."></textarea>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="control">
+              <label class="checkbox">
+                <input type="checkbox">
+                Acepto los <a href="#">términos y condiciones</a>
+              </label>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="question">
+                Sí
+              </label>
+              <label class="radio">
+                <input type="radio" name="question">
+                No
+              </label>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="button-group">
+              <button class="button button-link">Enviar</button>
+              <button class="button" style="background-color: #eef3fc; color: #3273dc;">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer text-centered">
+    <div class="container">
+      <p>
+        <strong>CSS Tradicional vs Frameworks</strong> - Ejemplo comparativo
+      </p>
+      <p>
+        <small>© 2025 - Clase de CSS Frameworks</small>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
