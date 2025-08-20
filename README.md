@@ -1,109 +1,226 @@
-# Teoría y fundamentos del ejemplo
+Clase 11 - Desestructuración, Operadores y Copias en JavaScript
 
-Este proyecto muestra cómo crear una landing page moderna y responsive usando Bulma, Font Awesome y JavaScript modular. A continuación se explican los conceptos principales utilizados:
+En esta clase veremos conceptos fundamentales de JavaScript moderno que hacen el código más limpio, legible y eficiente.
 
----
+Asignación por Desestructuración
 
-## Bulma CSS
+Operadores Spread y Rest
 
-Bulma es un framework CSS basado en Flexbox que permite crear interfaces web responsivas y modernas sin necesidad de escribir CSS personalizado. Sus componentes principales son:
+Inmutabilidad
 
-- **Navbar**: Barra de navegación fija y adaptable. [Ver documentación](https://bulma.io/documentation/components/navbar/)
-- **Cards**: Tarjetas para mostrar información de manera visual y ordenada. [Ver documentación](https://bulma.io/documentation/components/card/)
-- **Columns**: Sistema de grillas para distribuir elementos en filas y columnas. [Ver documentación](https://bulma.io/documentation/layout/columns/)
-- **Formularios**: Campos, botones, radios y checkboxes estilizados. [Ver documentación](https://bulma.io/documentation/form/general/)
-- **Footer**: Pie de página con diseño profesional. [Ver documentación](https://bulma.io/documentation/layout/footer/)
+Pasaje por Valor vs Pasaje por Referencia
 
----
+Shallow Copy vs Deep Copy
 
-## Font Awesome
+📌 1. Asignación por Desestructuración
 
-Font Awesome es una librería de iconos vectoriales que se integra fácilmente con Bulma y otros frameworks. Permite agregar iconos visuales a botones, cards, formularios y más. [Ver documentación](https://fontawesome.com/icons)
+La desestructuración es una forma de extraer datos de arrays u objetos y asignarlos a variables de manera más concisa.
 
----
+🔹 En Arrays
 
-## JavaScript modular
+Se basa en la posición de los elementos.
 
-El ejemplo utiliza JavaScript moderno y modular para manejar la interacción del usuario:
+```js
+const numeros = [10, 20, 30];
+const [primero, segundo] = numeros;
+console.log(primero); // 10
+console.log(segundo); // 20
 
-- **Selección de elementos**: Se usa la función `$` para seleccionar elementos del DOM de forma sencilla.
-- **Validación en tiempo real**: Los campos del formulario se validan mientras el usuario escribe, mostrando feedback visual inmediato.
-- **Eventos**: Se emplea `addEventListener` para escuchar eventos como `input` y `submit`.
-- **Lógica separada**: La lógica de validación y la manipulación del DOM están separadas en funciones para facilitar el mantenimiento.
+// Saltando valores
+const [a, , c] = numeros;
+console.log(c); // 30
+```
 
-Referencias:
-- [MDN: querySelector](https://developer.mozilla.org/es/docs/Web/API/Document/querySelector)
-- [MDN: addEventListener](https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener)
+🔹 En Objetos
 
----
+Se basa en el nombre de las propiedades.
 
-## Flujo del ejemplo
 
-1. El usuario navega por las secciones usando la navbar fija.
-2. Visualiza carreras y cursos en cards con iconos y descripciones.
-3. Completa el formulario de contacto, que valida los datos en tiempo real.
-4. Al enviar el formulario, los datos se muestran en consola y se da feedback visual.
+```js
+const { nombre, edad } = persona;
+console.log(nombre); // "Ana"
+console.log(edad);   // 25
+```
 
----
+```js
+// Con valores por defecto
+const { ciudad = "Desconocida" } = persona;
+console.log(ciudad); // "Desconocida"
+```
 
-## Recursos útiles
 
-- [Bulma: Todos los componentes](https://bulma.io/documentation/)
-- [Font Awesome: Todos los iconos](https://fontawesome.com/icons)
-- [MDN: JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript)
-# Teoría y Utilidad de Bulma CSS
+✅ Ventajas: código más limpio y menos repetitivo.
+⚠️ Cuidado: en estructuras muy profundas puede volverse confuso.
 
-Bulma es un framework CSS moderno basado en Flexbox que permite crear interfaces web responsivas y atractivas de forma sencilla. A continuación se detallan los principales conceptos y componentes utilizados en el ejemplo:
+📌 2. Renombrando Variables
 
-## 1. Contenedor principal (`.container`)
-Sirve para centrar y limitar el ancho del contenido, haciendo que la página se vea ordenada en cualquier dispositivo.
+Podemos renombrar variables al desestructurar para evitar conflictos:
 
-## 2. Encabezados (`.title`, `.subtitle`)
-Permiten crear títulos y subtítulos con estilos predefinidos y opciones de alineación, tamaño y color.
+```js
+const usuario = { id: 1, nombre: "Lucía" };
+const { nombre: userName } = usuario;
+console.log(userName); // "Lucía"
+```
 
-## 3. Sistema de columnas (`.columns`, `.column`)
-Bulma utiliza Flexbox para crear grillas responsivas. Las columnas pueden tener diferentes tamaños y se adaptan automáticamente a móviles, tablets y computadoras usando modificadores como `.is-half`, `.is-one-quarter`, `.is-full-mobile`, `.is-half-tablet`, `.is-one-third-desktop`.
 
-## 4. Offset (`.is-offset-*`)
-Permite desplazar columnas hacia la derecha sin necesidad de agregar columnas vacías, logrando diseños más flexibles.
+También podemos combinar renombrado y valores por defecto:
 
-## 5. Columnas anidadas
-Se pueden crear grillas dentro de otras columnas para organizar mejor el contenido.
+```js
+const { rol: role = "Invitado" } = usuario;
+console.log(role); // "Invitado"
+```
 
-## 6. Tarjetas (`.card`)
-Las tarjetas son componentes visuales que agrupan imágenes, títulos y textos de forma atractiva y ordenada.
+📌 3. Desestructuración Anidada
 
-## 7. Botones (`.button`)
-Bulma ofrece botones con diferentes colores, tamaños y estilos. Se pueden personalizar con modificadores como `.is-primary`, `.is-danger`, `.is-outlined` y agregar íconos con `.icon`.
+Se usa cuando hay objetos o arrays dentro de otros.
 
-## 8. Helpers
-Clases que permiten modificar rápidamente colores de fondo (`.has-background-*`), alineación de texto (`.has-text-centered`), márgenes (`.mt-5`), etc.
+```js
+const empleado = {
+  nombre: "Santiago",
+  direccion: {
+    ciudad: "Buenos Aires",
+    pais: "Argentina"
+  }
+};
+const { direccion: { ciudad, pais } } = empleado;
+console.log(ciudad); // "Buenos Aires"
+console.log(pais);   // "Argentina"
+```
 
-## 9. Formularios (`.field`, `.input`, `.textarea`, `.button`)
-Bulma facilita la creación de formularios estilizados y accesibles, con soporte para íconos y agrupación de campos.
+📌 4. Operadores Spread (...) y Rest (...)
 
-## 10. Navbar (`.navbar`)
-El navbar es un componente de navegación responsivo que incluye menú hamburguesa para móviles, enlaces y botones personalizados.
+Ambos usan ... pero no son lo mismo.
 
-## 11. Responsividad
-Bulma utiliza modificadores para adaptar el diseño a diferentes tamaños de pantalla sin necesidad de media queries manuales.
+🔹 Spread (expandir)
 
-## 12. Íconos
-Se pueden integrar íconos de Font Awesome fácilmente en botones, inputs y otros elementos para mejorar la experiencia visual.
+Sirve para expandir los valores de un array u objeto.
 
----
+```js
+// En Arrays
+const numeros = [1, 2, 3];
+const nuevos = [...numeros, 4, 5];
+console.log(nuevos); // [1, 2, 3, 4, 5]
 
-## ¿Para qué sirve Bulma?
-- Crear páginas web modernas y responsivas rápidamente.
-- Organizar el contenido en grillas flexibles.
-- Personalizar estilos sin escribir CSS desde cero.
-- Mejorar la accesibilidad y la experiencia de usuario.
+// En Objetos
+const persona = { nombre: "Ana", edad: 25 };
+const clon = { ...persona, ciudad: "Córdoba" };
+console.log(clon);
+```
 
-## ¿Cómo se usa?
-1. Se incluye el enlace a Bulma en el `<head>` del HTML.
-2. Se aplican las clases de Bulma a los elementos HTML según la documentación.
-3. Se combinan componentes y helpers para lograr el diseño deseado.
+🔹 Rest (agrupar)
 
----
+Sirve para agrupar varios elementos en una sola variable.
 
-**Documentación oficial:** [https://bulma.io/documentation/](https://bulma.io/documentation/)
+// En Funciones
+```js
+function sumar(...numeros) {
+  return numeros.reduce((total, n) => total + n, 0);
+}
+console.log(sumar(1, 2, 3, 4)); // 10
+
+// En Arrays
+const [primero, ...resto] = [10, 20, 30, 40];
+console.log(resto); // [20, 30, 40]
+
+// En Objetos
+const { nombre, ...otros } = { nombre: "Ana", edad: 25, ciudad: "Córdoba" };
+console.log(otros); // { edad: 25, ciudad: "Córdoba" }
+```
+
+📌 Diferencia clave:
+
+Spread → expande los elementos (deconstruye).
+
+Rest → agrupa los elementos (construye).
+
+📌 5. Inmutabilidad
+
+La inmutabilidad evita modificar los datos originales y trabajar siempre con copias.
+
+```js
+const persona = { nombre: "Ana", edad: 25 };
+
+// ❌ Mal: muta el objeto
+persona.edad = 30;
+
+// ✅ Bien: crear copia con spread
+const personaCopia = { ...persona, edad: 30 };
+```
+
+
+En arrays se usan métodos que crean nuevas versiones: map(), filter(), concat().
+
+📌 6. Pasaje por Valor vs Pasaje por Referencia
+
+Por Valor → tipos primitivos (string, number, boolean, etc.)
+
+Por Referencia → objetos y arrays
+
+// Por valor
+let a = 10;
+console.log(a); // 10 (independiente)
+```js
+let a = 10;
+let b = a;
+📌 7. Shallow Copy vs Deep Copy
+console.log(a); // 10 (independiente)
+
+// Por referencia
+let obj1 = { nombre: "Ana" };
+let obj2 = obj1;
+obj2.nombre = "Lucía";
+console.log(obj1.nombre); // "Lucía" (mismo objeto en memoria)
+```
+ Shallow Copy (copia superficial)
+
+Copia solo el primer nivel. Los objetos anidados siguen compartiendo referencia.
+
+copia1.direccion.ciudad = "Rosario";
+```js
+const persona = { nombre: "Ana", direccion: { ciudad: "Córdoba" } };
+const copia1 = { ...persona };
+
+copia1.direccion.ciudad = "Rosario";
+console.log(persona.direccion.ciudad); // "Rosario" 😱
+```
+
+🔹 Deep Copy (copia profunda)
+
+Crea una copia completa, incluyendo objetos anidados.
+
+La forma más usada es con:
+
+```js
+const copia2 = JSON.parse(JSON.stringify(persona));
+
+
+📖 Explicación:
+
+JSON.stringify(objeto) → convierte el objeto en un texto JSON.
+
+JSON.parse(texto) → convierte ese texto nuevamente en un objeto nuevo.
+
+Resultado: un objeto totalmente nuevo, sin referencias compartidas.
+
+copia2.direccion.ciudad = "Mendoza";
+const persona = { nombre: "Ana", direccion: { ciudad: "Córdoba" } };
+const copia2 = JSON.parse(JSON.stringify(persona));
+
+copia2.direccion.ciudad = "Mendoza";
+console.log(persona.direccion.ciudad); // "Córdoba" 🎉 (independiente)
+```
+
+
+⚠️ Limite: esta técnica no funciona con funciones, Date, Map, Set, etc., ya que JSON no los soporta.
+
+✅ Resumen
+
+La desestructuración simplifica la extracción de datos.
+
+Spread expande valores, Rest los agrupa.
+
+La inmutabilidad evita errores y hace el código más seguro.
+
+Diferenciar valor vs referencia es clave para evitar bugs.
+
+Una shallow copy no es suficiente si hay anidaciones → usar deep copy con JSON.parse(JSON.stringify()) u otras técnicas.
