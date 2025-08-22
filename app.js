@@ -1,3 +1,16 @@
+// const numeros = [10, 20, 30];
+
+// console.log(numeros[0]);
+
+// const [primero, segundo] = numeros;
+
+// console.log(primero); // 10
+// console.log(segundo); // 20
+
+// // Saltando valores
+// const [a, , c] = numeros;
+// console.log(c); // 30
+
 const careers_data = [
   {
     title: "Frontend",
@@ -14,9 +27,8 @@ const careers_data = [
   },
   {
     title: "Fullstack",
-    // Ejemplo de array de objetos con la info de las cards de carreras",
     image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80",
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=500&q=80",
     icons: [
       { class: "fab fa-html5", color: "has-text-danger" },
       { class: "fab fa-css3-alt", color: "has-text-info" },
@@ -24,102 +36,118 @@ const careers_data = [
       { class: "fab fa-react", color: "has-text-primary" },
     ],
     description:
-      "La carrera de Fullstack te prepara para crear interfaces web modernas y responsivas usando HTML, CSS, JavaScript y frameworks como React. Aprenderás sobre diseño, accesibilidad y experiencia de usuario.",
+      "La carrera de Frontend te prepara para crear interfaces web modernas y responsivas usando HTML, CSS, JavaScript y frameworks como React. Aprenderás sobre diseño, accesibilidad y experiencia de usuario.",
   },
 ];
-const $ = (selector) => document.querySelector(selector);
-  const formData = $("#registerForm");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const getTargetMenu = (burger) =>
-    document.getElementById(burger.dataset.target);
+// const [frontend] = careers_data;
 
-  const toggleMenu = (burger) => {
-    burger.classList.toggle("is-active");
-    const targetMenu = getTargetMenu(burger);
-    targetMenu?.classList.toggle("is-active");
-  };
+// console.log(frontend.title);
 
-  const addBurgerListeners = () =>
-    document
-      .querySelectorAll(".navbar-burger")
-      .forEach((burger) =>
-        burger.addEventListener("click", () => toggleMenu(burger))
-      );
-  addCard(careers_data);
-  addBurgerListeners();
+// const persona = {
+//   nombre: "cintia",
+//   edad: 25,
+// };
 
-  const form = $("#registerForm");
-  const firstNameInput = $("#firstName");
-  const lastNameInput = $("#lastName");
-  const emailInput = $("#email");
-  const reasonInput = $("#reason");
-  const whatsappInput = $("#whatsapp");
+// const { edad } = persona;
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const datosForm = {
-      nombre: firstNameInput.value.trim(),
-      apellido: lastNameInput.value.trim(),
-      email: emailInput.value.trim(),
-      motivo: reasonInput.value.trim(),
-      whatsapp: whatsappInput.checked,
-      pregunta: form.querySelector('input[name="question"]:checked')?.value || null
-    };
-    console.log("Datos del formulario:", datosForm);
-  });
+// const { icons, title, description } = frontend;
 
-  emailInput.addEventListener("input", () => {
-    const emailValue = emailInput.value;
+// console.log(icons);
 
-    if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailValue)) {
-      emailInput.classList.add("is-success");
-      emailInput.classList.remove("is-danger");
+// icons.map((i) => console.log(i));
 
-      if (emailHelp) {
-        emailHelp.textContent = "Email válido";
-        emailHelp.className = "help is-success";
-      }
-    } else {
-      emailInput.classList.add("is-danger");
-      emailInput.classList.remove("is-success");
-      if (emailHelp) {
-        emailHelp.textContent = "Email inválido";
-        emailHelp.className = "help is-danger";
-      }
-    }
-  });
-});
-const addCard = (data) => {
-  data.map(
-    (careers) =>
-      ($("#careers").innerHTML += `
-   <div class="card mt-5 mb-5" style="max-width: 500px; margin: auto;">
-        <div class="card-image">
-            <figure class="image is-4by3">
-                <img src=${careers.image}
-                    alt="Frontend" />
-            </figure>
-        </div>
-        <div class="card-content">
-            <div class="media">
-                <div class="media-content">
-                    <p class="title is-4">${careers.title}</p>
-                    <p class="subtitle is-6">Modalidad: on-line</p>
-                </div>
-            </div>
-            <div class="tags mt-2">
-                <span class="icon is-medium has-text-danger"><i class="fab fa-html5 fa-2x"></i></span>
-                <span class="icon is-medium has-text-info"><i class="fab fa-css3-alt fa-2x"></i></span>
-                <span class="icon is-medium has-text-warning"><i class="fab fa-js fa-2x"></i></span>
-                <span class="icon is-medium has-text-primary"><i class="fab fa-react fa-2x"></i></span>
-            </div>
-            <div class="content">
-                ${careers.description}
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>`)
-  );
+// // Con valores por defecto
+// const { ciudad = "Desconocida" } = persona;
+// console.log(ciudad); // "Desconocida"
+
+// const usuario = {
+//   id: 1,
+//   apellido: "Lucía",
+// };
+
+// const alumnos = {
+//   id: 2,
+//   apellido: "geo",
+// };
+
+// const { apellido } = usuario;
+
+// const { apellido: apellido_alumnos } = alumnos;
+
+// console.log(apellido);
+// console.log(apellido_alumnos);
+
+// // const { apellido: userName } = usuario;
+// // console.log(userName); // "Lucía"
+const empleado = {
+  nombre: "Santiago",
+  direccion: {
+    ciudad: "Buenos Aires",
+    pais: "Argentina",
+  },
 };
+
+const nuevo = { ...empleado}
+
+nuevo.nombre = "cordoba"
+
+console.log(empleado.nombre)
+
+console.log(nuevo.nombre)
+
+
+// const {direccion : { pais, pepe }} = empleado;
+
+// console.log(direccion.pais)
+
+// const numeros = [1, 2, 3];
+
+// const nuevo_array = [4, 5, 6];
+
+// const todos = [...numeros, ...nuevo_array];
+
+// const ia = {};
+// const ada2025 = [...careers_data, ia];
+
+// const empleado_completo = {
+//   ...empleado,
+//   pepe: "pepe",
+// };
+// console.log(empleado_completo);
+
+// const [primero, ...resto] = [10, 20, 30, 40];
+
+// console.log(resto); // [20, 30, 40]
+
+// const [alumna_aprobada, , ...en_revision] = ["geo", "meli", "pame"];
+
+// console.log(alumna_aprobada);
+// console.log(en_revision);
+
+// const persona = { nombre: "Carlos", password: 30, pais: "Argentina" };
+// const { password, ...datosRestantes } = persona;
+
+// console.log( password); // Carlos
+// console.log( datosRestantes); // { edad: 30, pais: 'Argentina' }
+
+
+// // persona.password=32
+// const personaCopia = { ...persona, password: 32 };
+// console.log(personaCopia.password)
+
+// let a = 10
+// let b = a
+
+// b=20
+
+// console.log(b, a)
+
+let obj1 = { nombre: "Ana" };
+
+let obj2 = obj1;
+console.log(obj2, obj1)
+
+obj2.nombre = "pepe"
+
+console.log(obj2, obj1)
