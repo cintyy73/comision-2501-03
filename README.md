@@ -359,18 +359,8 @@ controller.abort();
 
 ---
 
-## 8) Guion sugerido para la clase (90 minutos)
 
-1. **Motivación** (5’): por qué la UI no debe bloquearse.
-2. **Síncrono vs asíncrono** (10’): demo con `setTimeout`.
-3. **Event Loop & orden real** (15’): micro/macro tasks + ejemplo `Promise vs setTimeout`.
-4. **Promesas** (20’): crear y consumir, manejo de errores, `all`/`allSettled`.
-5. **`async/await`** (25’): refactor de `.then` a `await`, paralelo vs secuencial, `try/catch`.
-6. **Mini-proyecto** (15’): demo final con botón, spinner, `fetch`, `AbortController`, y logs del Event Loop.
-
----
-
-## 9) Ejercicios en vivo (para usar con los .js adjuntos)
+## 8) Ejercicios en vivo (para usar con los .js adjuntos)
 
 1. **Orden real**: predecir salida y luego ejecutar `A-D-C-B` (micro vs macro).
 2. **Refactor**: pasar un código con `.then` a `async/await` con `try/catch`.
@@ -378,13 +368,3 @@ controller.abort();
 4. **Errores**: simular 404 y manejar mensaje de error visible al usuario.
 5. **Abortar**: iniciar `fetch`, cancelar a los 300 ms y verificar `AbortError`.
 
----
-
-## 10) Recomendaciones
-
-- Usá `console.log` con **prefijos** para entender el flujo.
-- Mostrá **spinners**/mensajes mientras esperás.
-- Evitá `await` uno tras otro si se pueden hacer en **paralelo**.
-- No te olvides del **manejo de errores** (`try/catch`, `.catch`).
-
-> **Siguiente paso**: Abrí `clase12_ejemplos.js` para ver los ejemplos guiados y `clase12_demo_completo.js` para la demo final lista para usar.
