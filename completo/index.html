@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase 13 — CORS, Fetch, Then/Catch, Async/Await</title>
+
+  <!-- Bulma (UI rápida y simple) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <!-- FontAwesome (iconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .is-clickable { cursor: pointer; }
+    .avatar { object-fit: cover; }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">Demo API — Clase 13</h1>
+      <p class="subtitle has-text-centered">
+        CORS • Fetch • <code>then/catch</code> • <code>async/await</code> • CRUD
+      </p>
+
+      <!-- Alertas -->
+      <div id="alertas"></div>
+
+      <!-- Barra de acciones -->
+      <div class="box">
+        <div class="level">
+          <div class="level-left">
+            <div class="buttons">
+              <button id="btn-cargar-then" class="button is-info">
+                <span class="icon"><i class="fa-solid fa-download"></i></span>
+                <span>Cargar (then/catch)</span>
+              </button>
+              <button id="btn-cargar-async" class="button is-link">
+                <span class="icon"><i class="fa-solid fa-download"></i></span>
+                <span>Cargar (async/await)</span>
+              </button>
+            </div>
+          </div>
+          <div class="level-right">
+            <!-- Indicador de carga -->
+            <div id="cargando" style="display:none">
+              <button class="button is-text is-loading">Cargando…</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de creación (POST) -->
+        <form id="form-crear" class="columns is-multiline">
+          <div class="column is-3">
+            <div class="field">
+              <label class="label">Nombre</label>
+              <div class="control">
+                <input class="input" type="text" id="name" placeholder="Jane Doe" required />
+              </div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="field">
+              <label class="label">País</label>
+              <div class="control">
+                <input class="input" type="text" id="country" placeholder="Argentina" required />
+              </div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="field">
+              <label class="label">Trabajo</label>
+              <div class="control">
+                <input class="input" type="text" id="job" placeholder="Frontend Developer" required />
+              </div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="field">
+              <label class="label">Avatar (URL)</label>
+              <div class="control">
+                <input class="input" type="url" id="avatar" placeholder="https://placekitten.com/200/200" required />
+              </div>
+            </div>
+          </div>
+          <div class="column is-12">
+            <button class="button is-primary" type="submit">
+              <span class="icon"><i class="fa-solid fa-plus"></i></span>
+              <span>Crear usuario (POST)</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Lista de usuarios -->
+      <div class="columns is-multiline" id="usuarios-lista"></div>
+
+      <hr />
+
+      <article class="content">
+        <h2>Guía rápida (teoría resumida)</h2>
+        <ul>
+          <li><strong>CORS</strong> es una política de seguridad del navegador: solo el servidor puede habilitar el acceso entre orígenes distintos.</li>
+          <li><strong>fetch</strong> hace peticiones HTTP asíncronas; devuelve una <em>Promise</em>.</li>
+          <li><strong>.then()</strong> maneja la resolución exitosa; <strong>.catch()</strong> maneja errores.</li>
+          <li><strong>async/await</strong> es azúcar sintáctico sobre promesas, con <code>try/catch</code> para errores.</li>
+          <li>CRUD: <code>GET</code> (leer), <code>POST</code> (crear), <code>PUT</code> (editar), <code>DELETE</code> (borrar).</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <script src="./app.js"></script>
+</body>
+</html>
