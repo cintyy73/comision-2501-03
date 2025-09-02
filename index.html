@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Estudiantes Bulma + Fetch</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">CRUD Estudiantes</h1>
+      <div class="box">
+        <form id="form-estudiante" class="mb-4">
+          <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+              <input class="input" type="text" id="nombre" required>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">País</label>
+            <div class="control">
+              <input class="input" type="text" id="pais" required>
+            </div>
+          </div>
+         
+          </div>
+          <div class="field">
+            <label class="label">Avatar URL</label>
+            <div class="control">
+              <input class="input" type="url" id="avatar">
+            </div>
+          </div>
+          <input type="hidden" id="id">
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-success" type="submit" id="btn-guardar">Guardar</button>
+            </div>
+            <div class="control">
+              <button class="button is-light" type="button" id="btn-cancelar">Cancelar</button>
+            </div>
+          </div>
+        </form>
+        <div id="mensaje" class="has-text-centered"></div>
+        <table class="table is-fullwidth is-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>País</th>
+              <th>Trabajo</th>
+              <th>Avatar</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-estudiantes"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>

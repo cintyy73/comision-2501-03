@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Fetch MockAPI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+        <section class="section">
+            <div class="container">
+                <h1 class="title is-2 has-text-centered">🌐 Ejercicios Fetch con MockAPI</h1>
+                <p class="subtitle is-5 has-text-centered mb-5">Esta página contiene varios ejercicios para practicar el uso de Fetch API con MockAPI. Cada ejercicio se enfoca en un aspecto diferente de las peticiones HTTP.</p>
+
+                <div class="box mb-5">
+                    <h2 class="title is-4">🔍 Ejercicio 1: GET - Obtener Usuarios</h2>
+                    <p>Este ejercicio muestra cómo obtener una lista de usuarios desde la API.</p>
+                    <div class="notification is-info">
+                        <button class="button is-link mb-3" id="btn-obtener-usuarios">Obtener Usuarios</button>
+                        <div id="resultado-get" class="content">Los resultados aparecerán aquí...</div>
+                    </div>
+                </div>
+
+                <div class="box mb-5">
+                    <h2 class="title is-4">➕ Ejercicio 2: POST - Crear Usuario</h2>
+                    <p>Aprende a enviar datos para crear un nuevo usuario en la API.</p>
+                    <div class="notification is-info">
+                        <form id="form-crear-usuario">
+                            <div class="field">
+                                <label class="label" for="nombre">Nombre:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="pais">País:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="pais" placeholder="Ej. Argentina" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="trabajo">Trabajo:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="trabajo" placeholder="Ej. Desarrollador Web" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="avatar">URL del Avatar:</label>
+                                <div class="control">
+                                    <input class="input" type="url" id="avatar" placeholder="https://ejemplo.com/imagen.jpg">
+                                </div>
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-success" type="submit">Crear Usuario</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="resultado-post" class="content">Los resultados aparecerán aquí...</div>
+                    </div>
+                </div>
+
+                <div class="box mb-5">
+                    <h2 class="title is-4">🔄 Ejercicio 3: PUT - Actualizar Usuario</h2>
+                    <p>Practica la actualización de información de un usuario existente.</p>
+                    <div class="notification is-info">
+                        <form id="form-actualizar-usuario">
+                            <div class="field">
+                                <label class="label" for="id-actualizar">ID del Usuario:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="id-actualizar" placeholder="Ej. 1" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="nombre-actualizar">Nuevo Nombre:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="nombre-actualizar" placeholder="Ej. Juan Pérez">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="pais-actualizar">Nuevo País:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="pais-actualizar" placeholder="Ej. Argentina">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="trabajo-actualizar">Nuevo Trabajo:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="trabajo-actualizar" placeholder="Ej. Desarrollador Web">
+                                </div>
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-warning" type="submit">Actualizar Usuario</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="resultado-put" class="content">Los resultados aparecerán aquí...</div>
+                    </div>
+                </div>
+
+                <div class="box mb-5">
+                    <h2 class="title is-4">❌ Ejercicio 4: DELETE - Eliminar Usuario</h2>
+                    <p>Aprende a eliminar un usuario de la API.</p>
+                    <div class="notification is-info">
+                        <form id="form-eliminar-usuario">
+                            <div class="field">
+                                <label class="label" for="id-eliminar">ID del Usuario a Eliminar:</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="id-eliminar" placeholder="Ej. 1" required>
+                                </div>
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-danger" type="submit">Eliminar Usuario</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="resultado-delete" class="content">Los resultados aparecerán aquí...</div>
+                    </div>
+                </div>
+
+                <div class="box mb-5">
+                    <h2 class="title is-4">🖥️ Ejercicio 5: Aplicación CRUD Completa</h2>
+                    <p>Combina todas las operaciones anteriores en una aplicación de gestión de usuarios.</p>
+                    <div class="notification is-info">
+                        <div class="buttons mb-3">
+                            <button class="button is-link" id="btn-mostrar-usuarios">Mostrar Usuarios</button>
+                            <button class="button is-success" id="btn-mostrar-form-crear">Nuevo Usuario</button>
+                        </div>
+                        <div id="form-crear-container" style="display:none">
+                            <h3 class="title is-5">Crear Nuevo Usuario</h3>
+                            <form id="form-crud-crear">
+                                <div class="field">
+                                    <label class="label" for="crud-nombre">Nombre:</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="crud-nombre" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="crud-pais">País:</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="crud-pais" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="crud-trabajo">Trabajo:</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="crud-trabajo" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="crud-avatar">Avatar URL:</label>
+                                    <div class="control">
+                                        <input class="input" type="url" id="crud-avatar" placeholder="https://ejemplo.com/imagen.jpg">
+                                    </div>
+                                </div>
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button" type="button" id="btn-cancelar-crear">Cancelar</button>
+                                    </div>
+                                    <div class="control">
+                                        <button class="button is-success" type="submit">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="form-editar-container" style="display:none">
+                            <h3 class="title is-5">Editar Usuario</h3>
+                            <form id="form-crud-editar">
+                                <input type="hidden" id="crud-editar-id">
+                                <div class="field">
+                                    <label class="label" for="crud-editar-nombre">Nombre:</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="crud-editar-nombre" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="crud-editar-pais">País:</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="crud-editar-pais" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="crud-editar-trabajo">Trabajo:</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="crud-editar-trabajo" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label" for="crud-editar-avatar">Avatar URL:</label>
+                                    <div class="control">
+                                        <input class="input" type="url" id="crud-editar-avatar">
+                                    </div>
+                                </div>
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button" type="button" id="btn-cancelar-editar">Cancelar</button>
+                                    </div>
+                                    <div class="control">
+                                        <button class="button is-warning" type="submit">Actualizar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="usuarios-container">
+                            <!-- Aquí se mostrarán los usuarios -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+  <script src="fetch_mockapi_ejercicios.js"></script>
+</body>
+</html>
