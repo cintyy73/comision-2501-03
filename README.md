@@ -1,184 +1,88 @@
-# 📘 Clase 13 — CORS, Fetch, Then y Catch
+# Rick and Morty Cards con Filtros Dinámicos
 
-## 📑 Índice
-- [🔹 ¿Qué es CORS?](#-qué-es-cors)
-- [🔹 ¿Qué es fetch?](#-qué-es-fetch)
-- [🔹 Ejemplo de uso con fetch](#-ejemplo-de-uso-con-fetch)
-  - [GET — Obtener datos](#get--obtener-datos)
-  - [POST — Crear un nuevo usuario](#post--crear-un-nuevo-usuario)
-  - [PUT — Actualizar un usuario](#put--actualizar-un-usuario)
-  - [DELETE — Eliminar un usuario](#delete--eliminar-un-usuario)
-- [🔹 .then() y Promesas](#-then-y-promesas)
-- [🔹 .catch() y manejo de errores](#-catch-y-manejo-de-errores)
-- [🔹 Async/Await (forma más limpia)](#-asyncawait-forma-más-limpia)
-- [📌 Resumen](#-resumen)
+## Descripción
+Este ejercicio muestra cómo consumir la API pública de Rick and Morty para renderizar tarjetas de personajes y aplicar filtros dinámicos por nombre, especie, estado y género. Utiliza Bulma para los estilos y JavaScript moderno (ES6+).
 
 ---
 
-## 🔹 ¿Qué es CORS?
-CORS (**Cross-Origin Resource Sharing**) es una política de seguridad de los navegadores.  
-👉 Evita que una web (ejemplo: `tusitio.com`) pueda pedir datos a otro dominio (`api.otrodominio.com`) sin permiso.
+# Guía paso a paso para recrear el ejercicio de Rick and Morty Cards
 
-### ¿Qué es un "origen"?
-Un **origen** se define por:
-- Protocolo (`http` o `https`)
-- Dominio (`tusitio.com`)
-- Puerto (`:3000`)
+## 1. Crear la estructura de archivos
+Crea una carpeta y dentro los archivos:
+- `index.html`
+- `app.js`
+- `README.md`
 
-Si alguno cambia, se considera otro origen.
-
-### ¿Por qué existe?
-Para **proteger tus datos** de sitios maliciosos que podrían intentar acceder a tus sesiones (ej: Gmail).
-
-### ¿Qué pasa si falla?
-- Verás un **error CORS en la consola** del navegador.  
-- No se puede arreglar desde el **frontend**.  
-- El **servidor** debe permitir tu origen con una cabecera HTTP:  
-
-```http
-Access-Control-Allow-Origin: *
+## 2. Agregar Bulma al HTML
+En el `<head>` de tu HTML:
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 ```
 
-o bien:
+## 3.
+- API: Permite obtener datos externos en formato JSON.
+- fetch: Método nativo para consumir APIs.
+- Bulma: Framework CSS para estilos rápidos y responsivos.
+- Arrow functions: Sintaxis moderna y concisa.
+- Manipulación del DOM: Para mostrar y actualizar los datos en la página.
+- Filtros automáticos: Mejoran la experiencia del usuario.
 
-```http
-Access-Control-Allow-Origin: https://tusitio.com
+## Paso a paso para replicar el ejercicio
+
+### 1. Estructura de archivos
+- `index.html`: Estructura y filtros del formulario.
+- `app.js`: Lógica de consumo de API, renderizado y filtrado.
+- `README.md`: Explicación y guía.
+
+### 2. Teoría
+#### ¿Qué es una API?
+Una API (Interfaz de Programación de Aplicaciones) permite que dos sistemas se comuniquen. En este caso, la API de Rick and Morty expone datos de personajes en formato JSON accesible vía HTTP.
+
+#### ¿Qué es fetch?
+`fetch` es una función nativa de JavaScript para hacer peticiones HTTP y obtener datos de servidores externos. Devuelve una promesa que se resuelve con la respuesta.
+
+#### ¿Qué es Bulma?
+Bulma es un framework CSS moderno basado en Flexbox, que facilita la creación de interfaces responsivas y atractivas sin escribir mucho CSS.
+
+#### ¿Qué es el DOM?
+El DOM (Document Object Model) es la representación en memoria de la estructura HTML. Usamos métodos como `getElementById` para acceder y modificar elementos.
+
+#### ¿Qué es un filtro dinámico?
+Un filtro dinámico actualiza los resultados en tiempo real, sin necesidad de recargar la página ni presionar un botón. Se logra escuchando eventos como `input` y `change` en los campos del formulario.
+
+---
+
+### 3. Implementación
+
+#### a) Crear el HTML
+Incluye Bulma y define los filtros:
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<!-- ...formulario con filtros por nombre, especie, estado y género... -->
 ```
 
-⚠️ En desarrollo, podés usar un **proxy** o configurar CORS en tu backend.
+#### b) Crear el JS
+- Usar `fetch` para obtener personajes y especies.
+- Renderizar tarjetas con los datos.
+- Aplicar colores según estado y género usando clases Bulma.
+- Escuchar eventos en los filtros para actualizar los resultados automáticamente.
+
+#### c) Lógica de filtrado
+- El filtro por nombre usa el evento `input`.
+- Los filtros de especie, estado y género usan el evento `change`.
+- Al cambiar cualquier filtro, se hace una nueva petición a la API y se actualizan las tarjetas.
+
+#### d) Mejoras y buenas prácticas
+- Usar funciones flecha y helpers para código más limpio.
+- Evitar repeticiones con funciones como `getFilters` y `getTagClass`.
+- Eliminar el botón de filtrado para UX más fluida.
 
 ---
 
-## 🔹 ¿Qué es fetch?
-`fetch` es una función nativa de JavaScript para hacer peticiones HTTP asíncronas (GET, POST, PUT, DELETE).  
-
-👉 Se usa para consumir **APIs** sin recargar la página.
-
-### Datos que puede traer:
-- JSON (lo más común)  
-- Texto  
-- HTML  
-- Imágenes  
+## Recursos
+- [API Rick and Morty](https://rickandmortyapi.com/documentation)
+- [Bulma](https://bulma.io/documentation/)
+- [fetch MDN](https://developer.mozilla.org/es/docs/Web/API/Fetch_API)
 
 ---
 
-## 🔹 Ejemplo de uso con fetch
-
-### GET — Obtener datos
-```js
-fetch("https://68af4654b91dfcdd62bbe419.mockapi.io/api/users")
-  .then(response => {
-    if (!response.ok) throw new Error("Error en la respuesta");
-    return response.json(); // Convertir a JSON
-  })
-  .then(data => {
-    console.log("Usuarios:", data);
-  })
-  .catch(error => {
-    console.error("Hubo un error:", error);
-  });
-```
-
----
-
-### POST — Crear un nuevo usuario
-```js
-fetch("https://68af4654b91dfcdd62bbe419.mockapi.io/api/users", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name: "Nuevo Usuario",
-    country: "Argentina",
-    job: "Frontend Developer",
-    avatar: "https://placekitten.com/200/200"
-  })
-})
-  .then(response => response.json())
-  .then(newUser => console.log("Usuario creado:", newUser))
-  .catch(error => console.error("Error:", error));
-```
-
----
-
-### PUT — Actualizar un usuario
-```js
-fetch("https://68af4654b91dfcdd62bbe419.mockapi.io/api/users/1", {
-  method: "PUT",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name: "Usuario Actualizado",
-    job: "Backend Developer"
-  })
-})
-  .then(response => response.json())
-  .then(updatedUser => console.log("Usuario actualizado:", updatedUser))
-  .catch(error => console.error("Error:", error));
-```
-
----
-
-### DELETE — Eliminar un usuario
-```js
-fetch("https://68af4654b91dfcdd62bbe419.mockapi.io/api/users/2", {
-  method: "DELETE"
-})
-  .then(response => response.json())
-  .then(deletedUser => console.log("Usuario eliminado:", deletedUser))
-  .catch(error => console.error("Error:", error));
-```
-
----
-
-## 🔹 .then() y Promesas
-- **`.then()`** se ejecuta cuando una promesa se resuelve bien.  
-- Permite encadenar pasos: primero convertir la respuesta, luego usar los datos.  
-- Ayuda a evitar el **callback hell**.  
-
-Ejemplo:
-```js
-fetch("https://68af4654b91dfcdd62bbe419.mockapi.io/api/users")
-  .then(r => r.json())
-  .then(data => console.log("Usuarios:", data));
-```
-
----
-
-## 🔹 .catch() y manejo de errores
-Se ejecuta cuando **algo falla**, por ejemplo:  
-- URL mal escrita  
-- El servidor no responde  
-- Error 404 o 500  
-
-Ejemplo:
-```js
-fetch("https://api.inexistente.com/data")
-  .then(r => r.json())
-  .catch(error => console.error("Error detectado:", error));
-```
-
----
-
-## 🔹 Async/Await (forma más limpia)
-```js
-async function obtenerUsuarios() {
-  try {
-    const response = await fetch("https://68af4654b91dfcdd62bbe419.mockapi.io/api/users");
-    if (!response.ok) throw new Error("Error en la respuesta");
-    const data = await response.json();
-    console.log("Usuarios:", data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-
-obtenerUsuarios();
-```
-
----
-
-## 📌 Resumen
-- **CORS** protege a los usuarios → lo habilita el servidor, no el frontend.  
-- **fetch** permite pedir/enviar datos con promesas.  
-- **`.then()`** → manejar respuestas exitosas.  
-- **`.catch()`** → manejar errores.  
-- **async/await** → sintaxis más simple para trabajar con promesas.  
