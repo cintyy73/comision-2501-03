@@ -1,6 +1,6 @@
-
 // URL base de la API pública de Rick and Morty
 const API_URL = 'https://rickandmortyapi.com/api/character';
+
 // Helper para acceder rápido a elementos del DOM por id
 // Usamos arrow function por sintaxis moderna y concisa
 const $ = e => document.getElementById(e);
@@ -11,26 +11,31 @@ const speciesSelect = $("species"); // Select de especies
 const statusSelect = $("status"); // Select de estado
 const genderSelect = $("gender"); // Select de género
 
-// Obtenemos todas las especies disponibles en la API
-// También obtenemos los estados y géneros únicos
-// Usamos Set para almacenar valores únicos de especie, estado y género.
-// Set es una estructura de datos de ES6 que no permite duplicados, ideal para recolectar valores únicos de un array.
+// Obtenemos todas las especies, estados y géneros únicos recorriendo todas las páginas de la API
 const fetchAllFilters = async () => {
-  const speciesSet = new Set();
-  const statusSet = new Set();
-  const genderSet = new Set();
-  let nextUrl = API_URL;
+  const speciesSet = new Set(); // Set para especies únicas
+  const statusSet = new Set();  // Set para estados únicos
+  const genderSet = new Set();  // Set para géneros únicos
+  let nextUrl = API_URL;        // Comenzamos con la URL base
+  // Recorremos todas las páginas de la API
   while (nextUrl) {
-    const res = await fetch(nextUrl);
+    // 1. Pedimos los datos de la página actual
+    const res = await fetch(nextUrl); 
+    // 2. Si la respuesta no es OK, salimos del bucle
     if (!res.ok) break;
+    // 3. Convertimos la respuesta en JSON
     const data = await res.json();
+    // 4. Recorremos los personajes de la página actual
     data.results.forEach(char => {
+      // 5. Añadimos la especie, estado y género al Set correspondiente
       speciesSet.add(char.species);
       statusSet.add(char.status);
       genderSet.add(char.gender);
     });
+    // 6. Actualizamos la URL para la siguiente página (si existe)
     nextUrl = data.info.next;
   }
+  // 7. Devolvemos los valores únicos y ordenados
   return {
     species: [...speciesSet].sort(),
     status: [...statusSet].sort(),
@@ -53,36 +58,7 @@ const fetchAllSpecies = async () => {
   return [...speciesSet].sort(); // Devolvemos especies ordenadas
 };
 
-// Obtiene personajes según los filtros seleccionados
-// Usamos parámetros de búsqueda en la URL para filtrar desde la API
-const fetchCharacters = async (params = {}) => {
-  // EJEMPLO ALTERNATIVO: Concatenar filtros usando template strings
-  // (No recomendado para producción, pero útil para entender cómo funcionan los filtros)
-  // let url = `${API_URL}?`;
-  // if (params.name) url += `name=${params.name}&`;
-  // if (params.species) url += `species=${params.species}&`;
-  // if (params.status) url += `status=${params.status}&`;
-  // if (params.gender) url += `gender=${params.gender}&`;
-  // url = url.slice(0, -1); // Eliminar el último &
-  // // fetch(url) ...
-  // Creamos la URL base y agregamos los filtros como parámetros de búsqueda
-  // Usamos el objeto URL para manipular la query string de forma segura y legible
-  const url = new URL(API_URL);
-  // Recorremos los filtros y los agregamos si tienen valor
-  // Esto permite que la API devuelva solo los personajes que cumplen con los criterios
-  Object.entries(params).forEach(([key, value]) => {
-    if (value) url.searchParams.append(key, value);
-  });
-  // Realizamos la petición HTTP con fetch
-  // fetch devuelve una promesa que se resuelve con la respuesta del servidor
-  const res = await fetch(url);
-  // Si la respuesta no es exitosa, devolvemos un array vacío
-  if (!res.ok) return [];
-  // Convertimos la respuesta en JSON para poder trabajar con los datos
-  const data = await res.json();
-  // La API devuelve los personajes en la propiedad 'results'. Si no existe, devolvemos array vacío
-  return data.results || [];
-};
+// ...existing code...
 
 // Devuelve la clase de color Bulma según estado o género
 // Así damos feedback visual inmediato al usuario
@@ -133,18 +109,58 @@ const renderCards = chars => {
   });
 };
 
-// Carga los personajes y los muestra en pantalla
-// Se llama cada vez que el usuario cambia un filtro
-const loadAndRender = async (params = {}) => {
-  cards.innerHTML = '<progress class="progress is-small is-primary" max="100">Cargando...</progress>';
-  const characters = await fetchCharacters(params);
-  renderCards(characters);
+// --- Paginación ---
+let currentPage = 1;
+let totalPages = 1;
+
+// Crear controles de paginación en el DOM
+const paginationContainer = document.createElement('div');
+paginationContainer.id = 'pagination';
+paginationContainer.className = 'pagination is-centered mt-4';
+paginationContainer.innerHTML = `
+  <button id="prev-page" class="button is-small" disabled>Anterior</button>
+  <span id="page-info" class="mx-2">Página 1</span>
+  <button id="next-page" class="button is-small" disabled>Siguiente</button>
+`;
+cards.parentNode.insertBefore(paginationContainer, cards.nextSibling);
+
+const prevPageBtn = $("prev-page");
+const nextPageBtn = $("next-page");
+const pageInfo = $("page-info");
+
+// Modificar fetchCharacters para aceptar página y devolver totalPages
+const fetchCharacters = async (params = {}, page = 1) => {
+  const url = new URL(API_URL);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value) url.searchParams.append(key, value);
+  });
+  url.searchParams.append('page', page);
+  const res = await fetch(url);
+  if (!res.ok) return { results: [], totalPages: 1 };
+  const data = await res.json();
+  return { results: data.results || [], totalPages: data.info?.pages || 1 };
 };
 
+// Actualiza los controles de paginación
+const updatePaginationControls = () => {
+  pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+  prevPageBtn.disabled = currentPage <= 1;
+  nextPageBtn.disabled = currentPage >= totalPages;
+};
 
+// Renderiza las tarjetas de personajes en el DOM (sin cambios)
+// ...existing code...
+
+// Carga los personajes y los muestra en pantalla, con paginación
+const loadAndRender = async (params = {}, page = 1) => {
+  cards.innerHTML = '<progress class="progress is-small is-primary" max="100">Cargando...</progress>';
+  const { results, totalPages: pages } = await fetchCharacters(params, page);
+  totalPages = pages;
+  renderCards(results);
+  updatePaginationControls();
+};
 
 // Obtiene los valores actuales de los filtros
-// Así evitamos repetir código y centralizamos la lógica
 const getFilters = () => ({
   name: $("name").value.trim(),
   species: $("species").value,
@@ -152,9 +168,25 @@ const getFilters = () => ({
   gender: $("gender").value
 });
 
-// Ejecuta el filtrado cada vez que el usuario interactúa
-const triggerFilter = () => loadAndRender(getFilters());
+// Ejecuta el filtrado y resetea a la primera página
+const triggerFilter = () => {
+  currentPage = 1;
+  loadAndRender(getFilters(), currentPage);
+};
 
+// Listeners para paginación
+prevPageBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    loadAndRender(getFilters(), currentPage);
+  }
+});
+nextPageBtn.addEventListener('click', () => {
+  if (currentPage < totalPages) {
+    currentPage++;
+    loadAndRender(getFilters(), currentPage);
+  }
+});
 
 // El formulario ya no tiene botón, pero dejamos el listener por si se envía con Enter
 filtersForm.addEventListener('submit', e => {
@@ -168,30 +200,37 @@ $("species").addEventListener('change', triggerFilter);
 $("status").addEventListener('change', triggerFilter);
 $("gender").addEventListener('change', triggerFilter);
 
-// Carga inicial y especies
+// Función para limpiar todos los filtros y recargar personajes
+const clearFilters = () => {
+  $("name").value = '';
+  $("species").value = '';
+  $("status").value = '';
+  $("gender").value = '';
+  currentPage = 1;
+  loadAndRender(getFilters(), currentPage);
+};
+
+// Evento para el botón de limpiar filtros
+$("clear-filters").addEventListener('click', (e) => {
+  e.preventDefault();
+  clearFilters();
+});
+
 // Inicializa la app: llena el select de especies y muestra los personajes
 const init = async () => {
-  // Llenar selects dinámicamente
   const { species, status, gender } = await fetchAllFilters();
-  species.forEach(sp => {
-    const option = document.createElement('option');
-    option.value = sp;
-    option.textContent = sp;
-    speciesSelect.appendChild(option);
-  });
-  status.forEach(st => {
-    const option = document.createElement('option');
-    option.value = st.toLowerCase();
-    option.textContent = st;
-    statusSelect.appendChild(option);
-  });
-  gender.forEach(ge => {
-    const option = document.createElement('option');
-    option.value = ge.toLowerCase();
-    option.textContent = ge;
-    genderSelect.appendChild(option);
-  });
-  triggerFilter();
+  const fillSelect = (selectElement, options, lowercase = false) => {
+    options.forEach(option => {
+      const optionElement = document.createElement('option');
+      optionElement.value = lowercase ? option.toLowerCase() : option;
+      optionElement.textContent = option;
+      selectElement.appendChild(optionElement);
+    });
+  };
+  fillSelect(speciesSelect, species);
+  fillSelect(statusSelect, status, true);
+  fillSelect(genderSelect, gender, true);
+  loadAndRender(getFilters(), currentPage);
 };
 
 init();
