@@ -1,144 +1,165 @@
-const URL_BASE = "https://rickandmortyapi.com/api/character?";
+const API_URL = "https://64f0b20c8a8b66ecf7799c5b.mockapi.io/api/v1/comisiones"; // tu mockapi
 
-const $ = (e) => document.querySelector(e);
+const $ = e => document.getElementById(e);
+const container = $("cards-container");
+const filterCommission = $("filter-commission");
+const filterModule = $("filter-module");
+const filterStatus = $("filter-status");
+const btnFilter = $("btn-filter");
+const btnNew = $("btn-new");
 
-const cards = $("#cards");
-const genderSelect = $("#gender");
-const statusSelect = $("#status");
-const speciesSelect = $("#species");
-
-const fetchAllFilters = async () => {
-  const speciesSet = new Set();
-  const statusSet = new Set();
-  const genderSet = new Set();
-
-  let nextUrl = URL_BASE;
-
-  while (nextUrl) {
-    const res = await fetch(nextUrl);
-    if (!res.ok) break;
-    const data = await res.json();
-    data.results.forEach((character) => {
-      speciesSet.add(character.species);
-      statusSet.add(character.status);
-      genderSet.add(character.gender);
-    });
-
-    nextUrl = data.info.next;
+// 🔹 Obtener datos
+const fetchCommissions = async () => {
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("Error al obtener comisiones");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
   }
+};
 
-  return {
-    species: [...speciesSet].sort(),
-    status: [...statusSet].sort(),
-    gender: [...genderSet].sort(),
+// 🔹 Crear nueva comisión
+const createCommission = async () => {
+  const nombre = prompt("Nombre de la comisión:");
+  if (!nombre) return;
+
+  const nueva = {
+    nombre,
+    modulos: []
   };
-};
 
-const fetchCharacters = async (params = {}) => {
-  const url = new URL(URL_BASE);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value) url.searchParams.append(key, value);
-  });
-
-  const res = await fetch(url);
-  if (!res.ok) return [];
-
-  const data = await res.json();
-  return data.results;
-};
-
-const getTagClass =(type, value) =>{
-  const v = value.toLowerCase()
-
-  if(type === 'status') {
-    if(v === 'dead') return 'is-danger'
-    if(v === 'alive') return 'is-success'
-    return 'is-dark'
-   }
-if (type === 'gender') {
-    if (v === 'male') return 'is-link'; 
-    if (v === 'female') return 'is-warning';
-    if (v === 'genderless') return 'is-info'; 
-    return 'is-light'; 
-
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nueva)
+    });
+    if (!res.ok) throw new Error("Error al crear");
+    init(); // refresca
+  } catch (err) {
+    console.error(err);
   }
-  return ''
-}
-const renderCards = (characters) => {
-  cards.innerHTML = "";
-  characters.forEach(({species, name, status, gender, image}) => {
-  // characters.forEach((char) => {
-  // const {species, name, image, status, gender} =char
-    const column = document.createElement("div");
-    column.className = "column is-one-quarter";
-    column.innerHTML = `
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="${image}" alt="${name}">
-          </figure>
-        </div>
-        <div class="card-content">
-          <p class="title is-5">${name}</p>
-         <p><strong>Género: </strong><span class="tag ${getTagClass('gender', gender)}">${gender}</span></p>
-         <p><strong>Status: </strong><span class="tag ${getTagClass('status', status)}">${status}</span>}</p>
-         <p><strong>Especie: </strong>${species}</p>
+};
 
+// 🔹 Editar comisión
+const updateCommission = async (id, currentName) => {
+  const nuevoNombre = prompt("Nuevo nombre:", nombreActual);
+  if (!nuevoNombre) return;
+
+  try {
+    const res = await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre: nuevoNombre })
+    });
+    if (!res.ok) throw new Error("Error al actualizar");
+    init();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// 🔹 Eliminar comisión
+const deleteCommission = async (id) => {
+  if (!confirm("¿Eliminar comisión?")) return;
+
+  try {
+    const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Error al eliminar");
+    init();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// 🔹 Render cards
+const renderCards = (data) => {
+  container.innerHTML = "";
+
+  if (data.length === 0) {
+    container.innerHTML = `<p class="has-text-centered">No hay resultados</p>`;
+    return;
+  }
+
+  data.forEach(com => {
+    const card = document.createElement("div");
+    card.className = "column is-one-third";
+
+    card.innerHTML = `
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">${com.nombre}</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <strong>Módulos:</strong>
+            <ul>
+              ${com.modulos.map(m => `<li>${m.nombre} (${m.estado})</li>`).join("")}
+            </ul>
+          </div>
         </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item has-text-info" onclick="updateComision('${com.id}', '${com.nombre}')">✏️ Editar</a>
+          <a href="#" class="card-footer-item has-text-danger" onclick="deleteComision('${com.id}')">🗑️ Eliminar</a>
+        </footer>
       </div>
     `;
-    cards.appendChild(column);
+
+    container.appendChild(card);
   });
 };
 
+// 🔹 Filtros dinámicos desde la API
+const loadFilters = (data) => {
+  // Comisiones
+  const comisiones = [...new Set(data.map(c => c.nombre))];
+  filterComision.innerHTML = `<option value="">Todas las comisiones</option>` +
+    comisiones.map(c => `<option value="${c}">${c}</option>`).join("");
 
-const getFilters = () => {
-  return {
-    name: $("#name").value,
-    gender: $("#gender").value,
-    status: $("#status").value,
-    species: $("#species").value,
-  };
+  // Módulos
+  const modulos = [...new Set(data.flatMap(c => c.modulos.map(m => m.nombre)))];
+  filterModulo.innerHTML = `<option value="">Todos los módulos</option>` +
+    modulos.map(m => `<option value="${m}">${m}</option>`).join("");
+
+  // Estados dinámicos desde los módulos
+  const estados = [...new Set(data.flatMap(c => c.modulos.map(m => m.estado)))];
+  filterEstado.innerHTML = `<option value="">Todos los estados</option>` +
+    estados.map(e => `<option value="${e}">${e}</option>`).join("");
 };
 
-const loadAndRender = async (params = {}) => {
-  cards.innerHTML =
-    '<progress class="progress is-small is-primary" max="100">Cargando...</progress>';
-  const characters = await fetchCharacters(params);
-  renderCards(characters);
-};
+// 🔹 Filtrar
+const applyFilters = (data) => {
+  let filtrado = [...data];
 
-const triggerFilter = () => loadAndRender(getFilters());
-const clearFilters = () => {
-  $("name").value = '';
-  $("species").value = '';
-  $("status").value = '';
-  $("gender").value = '';
-  triggerFilter();
-};
-$("#name").addEventListener("input", triggerFilter);
-$("#gender").addEventListener("change", triggerFilter);
-$("#status").addEventListener("change", triggerFilter);
-$("#species").addEventListener("change", triggerFilter);
-// Evento para el botón de limpiar filtros
-$("clear-filters").addEventListener('click', (e) => {
-  e.preventDefault();
-  clearFilters();
-});
-const init = async () => {
-  const { species, status, gender } = await fetchAllFilters();
-  const fillSelect = (selectElement, options, lowercase = false) => {
-    options.forEach((option) => {
-      if (!option) return;
-      const optionElement = document.createElement("option");
-      optionElement.value = lowercase ? option.toLowerCase() : option;
-      optionElement.textContent = option;
-      selectElement.appendChild(optionElement);
+  if (filterComision.value) {
+    filtrado = filtrado.filter(c => c.nombre === filterComision.value);
+  }
+
+  filtrado.forEach(c => {
+    c.modulos = c.modulos.filter(m => {
+      const filtroModulo = filterModulo.value ? m.nombre === filterModulo.value : true;
+      const filtroEstado = filterEstado.value ? m.estado === filterEstado.value : true;
+      return filtroModulo && filtroEstado;
     });
-  };
-  fillSelect(speciesSelect, species);
-  fillSelect(statusSelect, status, true);
-  fillSelect(genderSelect, gender, true);
-  triggerFilter();
+  });
+
+  return filtrado.filter(c => c.modulos.length > 0 || (!filterModulo.value && !filterEstado.value));
 };
+
+// 🔹 Inicializar
+const init = async () => {
+  const data = await fetchCommissions();
+  loadFilters(data);
+  renderCards(data);
+
+  btnFilter.onclick = () => {
+    const filtered = applyFilters(data);
+    renderCards(filtered);
+  };
+
+  btnNew.onclick = createCommission;
+};
+
 init();
