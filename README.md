@@ -1,216 +1,113 @@
-# Guía paso a paso para desarrollar `app-completo.js`
+# 💻 Carrera Front End
 
-Este README te ayudará a enseñar y construir el proyecto Rick and Morty paso a paso, con teoría, mensajes de commit sugeridos y el código que debes ir agregando en cada etapa.
+## Trabajo Práctico Integrador - Buscador con MockAPI
 
----
+### 📝 Consigna
 
-## 1. Mostrar personajes básicos
-**Commit:** `feat: muestra personajes en pantalla usando fetch`
-**Teoría:** Aprender a consumir una API con `fetch` y mostrar datos en el DOM.
-```js
-const API_URL = 'https://rickandmortyapi.com/api/character';
-const cards = document.getElementById('cards');
+Vas a desarrollar una aplicación web que funcione como un **buscador con listado y detalle de elementos**.  
+La temática es **a elección**: puede ser un buscador de mascotas, alumnos, perfiles de trabajo, anuncios de empleo u otro conjunto de datos que prefieras.
 
-fetch(API_URL)
-  .then(res => res.json())
-  .then(data => {
-    data.results.forEach(char => {
-      const div = document.createElement('div');
-      div.className = 'card';
-      div.innerHTML = `<img src="${char.image}" alt="${char.name}"><p>${char.name}</p>`;
-      cards.appendChild(div);
-    });
-  });
-```
+La aplicación debe consumir datos desde **MockAPI** y permitir:  
+- Consultar información con distintos parámetros (búsqueda y filtros).  
+- Visualizar los resultados en forma clara y ordenada.  
+- Acceder al detalle de cada elemento.  
+- Administrar los datos con operaciones CRUD (crear, editar, eliminar).  
 
 ---
 
-## 2. Agregar filtro por nombre
-**Commit:** `feat: agrega filtro por nombre de personaje`
-**Teoría:** Cómo usar inputs y parámetros en la URL para filtrar resultados.
-```js
-const nameInput = document.getElementById('name');
-nameInput.addEventListener('input', () => {
-  const name = nameInput.value;
-  fetch(`${API_URL}?name=${name}`)
-    .then(res => res.json())
-    .then(data => {
-      cards.innerHTML = '';
-      data.results.forEach(char => {
-        // ...igual que antes...
-      });
-    });
-});
-```
+### 🌐 Enlaces importantes
+
+- [Demo del Trabajo Práctico](https://example.com/demo) falta agregarla!
+- [Ejemplo de README](https://github.com/cintyy73/comision-2501-03/blob/clase-17/filter_fixed.png)
 
 ---
 
-## 3. Agregar selects para especie, estado y género
-**Commit:** `feat: agrega selects dinámicos para especie, estado y género`
-**Teoría:** Obtener valores únicos de la API y llenar selects dinámicamente.
-```js
-const speciesSelect = document.getElementById('species');
-const statusSelect = document.getElementById('status');
-const genderSelect = document.getElementById('gender');
+### 📋 Criterios de aceptación
 
-fetch(API_URL)
-  .then(res => res.json())
-  .then(data => {
-    const speciesSet = new Set();
-    data.results.forEach(char => speciesSet.add(char.species));
-    speciesSet.forEach(species => {
-      const opt = document.createElement('option');
-      opt.value = species;
-      opt.textContent = species;
-      speciesSelect.appendChild(opt);
-    });
-  });
-```
+- ✅ Respetar el diseño general propuesto (colores, fuentes e íconos pueden personalizarse).  
+- ✅ Debe ser responsive, adaptándose a distintos dispositivos.  
+- ✅ Debe cumplir con todas las funcionalidades principales listadas.  
+- ✅ La aplicación debe estar deployada y accesible desde una URL.  
+- ✅ Uso obligatorio de **Git Flow simplificado**: desarrollo en rama `dev`, `main` solo para la entrega final.  
+- ✅ Incluir un **README.md completo** (obligatorio).  
 
 ---
 
-## 4. Filtrar personajes por todos los campos
-**Commit:** `feat: filtra personajes por nombre, especie, estado y género`
-**Teoría:** Usar varios filtros y construir la URL con parámetros dinámicos.
-```js
-function getFilters() {
-  return {
-    name: nameInput.value,
-    species: speciesSelect.value,
-    status: statusSelect.value,
-    gender: genderSelect.value
-  };
-}
+### ✅ Funcionalidades principales
 
-function fetchAndRender() {
-  const params = getFilters();
-  let url = API_URL + '?';
-  Object.entries(params).forEach(([key, value]) => {
-    if (value) url += `${key}=${value}&`;
-  });
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      cards.innerHTML = '';
-      (data.results || []).forEach(char => {
-        // ...igual que antes...
-      });
-    });
-}
+1. **Búsqueda y filtrado**  
+   - Búsqueda por nombre  
+   - Filtros por categoría/tipo y al menos otra característica específica  
+   - Botón para limpiar filtros  
+   - Mensaje claro cuando no hay resultados  
 
-nameInput.addEventListener('input', fetchAndRender);
-speciesSelect.addEventListener('change', fetchAndRender);
-statusSelect.addEventListener('change', fetchAndRender);
-genderSelect.addEventListener('change', fetchAndRender);
-```
+2. **Visualización de elementos**  
+   - Mostrar imagen/avatar  
+   - Mostrar nombre  
+   - Mostrar categoría o tipo con estilo distintivo  
+   - Botones para editar y eliminar  
+
+3. **Gestión de elementos (CRUD)**  
+   - Agregar nuevos elementos mediante formulario modal  
+   - Editar elementos existentes  
+   - Eliminar elementos con confirmación  
+
+4. **Experiencia de usuario**  
+   - Mostrar **spinner/loader** en operaciones de carga  
+   - Incluir **barra de filtros** con input de texto y al menos dos select  
+   - Utilizar únicamente **Bulma** para los estilos (sin CSS adicional)  
 
 ---
 
-## 5. Manejar paginación
-**Commit:** `feat: agrega paginación para navegar entre páginas de resultados`
-**Teoría:** Usar los links `info.next` y `info.prev` de la API para navegar.
-```js
-let nextPage = null;
-let prevPage = null;
+### 📊 Criterios de evaluación
 
-function fetchAndRender(url = API_URL) {
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      cards.innerHTML = '';
-      (data.results || []).forEach(char => {
-        // ...igual que antes...
-      });
-      nextPage = data.info.next;
-      prevPage = data.info.prev;
-    });
-}
-
-document.getElementById('next-btn').addEventListener('click', () => {
-  if (nextPage) fetchAndRender(nextPage);
-});
-document.getElementById('prev-btn').addEventListener('click', () => {
-  if (prevPage) fetchAndRender(prevPage);
-});
-```
+| Nota | Requisitos |
+|------|------------|
+| < 6  | No aprobado |
+| 6    | Cumple consigna básica, diseño, funcionamiento y es responsive |
+| 7    | HTML semántico, buen código, variables CSS correctas, README básico, Git básico |
+| 8    | Buena estructura, estilos coherentes, organización en componentes, README completo, commits regulares |
+| 9    | Componentización adecuada, funciones claras, datos bien estructurados, README detallado, buen manejo de ramas |
+| 10   | Reutilización, commits descriptivos y frecuentes, buen uso de Git Flow, README excelente |
 
 ---
 
-## 6. Mejorar la visualización de tarjetas
-**Commit:** `style: mejora el diseño de las tarjetas con Bulma`
-**Teoría:** Usar clases de Bulma para mostrar estado y género con colores.
-```js
-function getTagClass(type, value) {
-  if (type === 'status') {
-    if (value === 'Alive') return 'is-success';
-    if (value === 'Dead') return 'is-danger';
-    return 'is-dark';
-  }
-  // ...igual para género...
-}
+### 📘 Requisitos del README.md
 
-div.innerHTML = `
-  <img src="${char.image}" alt="${char.name}">
-  <p>${char.name}</p>
-  <span class="tag ${getTagClass('status', char.status)}">${char.status}</span>
-`;
-```
+- 📌 Título y descripción del proyecto (tema elegido)  
+- 📌 Capturas de pantalla de la app en funcionamiento  
+- 📌 Lista de funcionalidades implementadas (filtros, búsqueda, CRUD)  
+- 📌 Instrucciones de instalación y configuración  
+- 📌 Decisiones técnicas (opcional)  
+- 📌 Autores: nombres y enlaces a GitHub  
+- 📌 Créditos y agradecimientos (recursos utilizados)  
 
 ---
 
-## 7. Manejar errores y mensajes al usuario
-**Commit:** `fix: muestra mensajes si no hay resultados o hay error de API`
-**Teoría:** Mostrar notificaciones si no se encuentran personajes o hay error de red.
-```js
-fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    if (!data.results || data.results.length === 0) {
-      cards.innerHTML = '<div>No se encontraron personajes.</div>';
-      return;
-    }
-    // ...renderizar...
-  })
-  .catch(() => {
-    cards.innerHTML = '<div>Error al cargar los datos.</div>';
-  });
-```
+### 📦 Buenas prácticas de Git
+
+1. **Ramas**  
+   - `main` → solo para la entrega final  
+   - `dev` → desarrollo principal  
+
+2. **Commits**  
+   - Pequeños y frecuentes  
+   - Mensajes descriptivos con verbos en imperativo  
+   - Nombrar funciones adecuadamente (sin genéricos)  
+
+3. **Pull Requests**  
+   - Se puede trabajar con PR hacia `dev` si se organizan en equipo  
+   - PR con títulos descriptivos  
+   - Resolver conflictos antes de pedir revisión  
+
+4. **Prohibiciones**  
+   - ❌ **NO** hacer commits directamente en `main`  
+   - ❌ **NO** hacer un único commit grande al final del proyecto  
+   - ❌ **NO** usar spanglish en nombres  
+   - ❌ **NO** usar nombres poco claros (ej: `cosas`, `data`, `update2`)  
 
 ---
 
-## 8. Agregar botón para limpiar filtros
-**Commit:** `feat: agrega botón para limpiar todos los filtros`
-**Teoría:** Permitir al usuario reiniciar todos los filtros y mostrar todos los personajes.
-```js
-const clearBtn = document.getElementById('clear-filters');
-clearBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  nameInput.value = '';
-  speciesSelect.value = '';
-  statusSelect.value = '';
-  genderSelect.value = '';
-  fetchAndRender();
-});
-```
+### 📅 Fechas importantes
 
----
-
-## 9. Modularizar el código
-**Commit:** `refactor: centraliza funciones auxiliares y mejora la legibilidad`
-**Teoría:** Separar funciones y eventos para mejorar la organización y reutilización.
-```js
-function fillSelect(select, options) {
-  select.innerHTML = '';
-  options.forEach(opt => {
-    const option = document.createElement('option');
-    option.value = opt;
-    option.textContent = opt;
-    select.appendChild(option);
-  });
-}
-// ...y así para otras funciones auxiliares...
-```
-
----
-
-Sigue este orden para enseñar y construir el proyecto, explicando la teoría y mostrando el código en cada commit.
+- **Entrega final**: 22/09/2025
