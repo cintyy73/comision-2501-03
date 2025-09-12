@@ -73,7 +73,17 @@ La aplicación utiliza MockAPI como backend. Los endpoints utilizados son:
 
 ## 📸 Capturas de pantalla
 
-[Aquí puedes incluir capturas de pantalla de la aplicación]
+### Página de Inicio
+![Página de Inicio](home.png)
+
+### Página de Inicio (Vista Alternativa)
+![Página de Inicio Alternativa](home_01.png)
+
+### Pie de Página
+![Pie de Página](footer.png)
+
+### Filtro Corregido
+![Filtro Corregido](filter_fixed.png)
 
 ## 🤝 Contribuir
 
