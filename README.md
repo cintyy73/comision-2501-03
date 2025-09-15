@@ -10,8 +10,7 @@ La temática es **a elección**: puede ser un buscador de mascotas, alumnos, per
 La aplicación debe consumir datos desde **MockAPI** y permitir:  
 - Consultar información con distintos parámetros (búsqueda y filtros).  
 - Visualizar los resultados en forma clara y ordenada.  
-- Acceder al detalle de cada elemento.  
-- Administrar los datos con operaciones CRUD (crear, editar, eliminar).  
+- Administrar los datos con operaciones CRUD (crear, editar, eliminar, actualizar).  
 
 ---
 
@@ -27,7 +26,8 @@ La aplicación debe consumir datos desde **MockAPI** y permitir:
 - ✅ Respetar el diseño general propuesto (colores, fuentes e íconos pueden personalizarse).  
 - ✅ Debe ser responsive, adaptándose a distintos dispositivos.  
 - ✅ Debe cumplir con todas las funcionalidades principales listadas.  
-- ✅ La aplicación debe estar deployada y accesible desde una URL.  
+- ✅ La aplicación debe estar deployada y accesible desde una URL.
+- ✅ Será evaluado el usao de buenas prácticas, código limpio y reutilizable.  
 - ✅ Uso obligatorio de **Git Flow simplificado**: desarrollo en rama `dev`, `main` solo para la entrega final.  
 - ✅ Incluir un **README.md completo** (obligatorio).  
 
@@ -36,8 +36,8 @@ La aplicación debe consumir datos desde **MockAPI** y permitir:
 ### ✅ Funcionalidades principales
 
 1. **Búsqueda y filtrado**  
-   - Búsqueda por nombre  
-   - Filtros por categoría/tipo y al menos otra característica específica  
+   - Búsqueda por nombre/título  
+   - Filtros por categoría/tipo y al menos otra característica específica ej. seniority 
    - Botón para limpiar filtros  
    - Mensaje claro cuando no hay resultados  
 
