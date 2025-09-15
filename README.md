@@ -16,7 +16,7 @@ La aplicación debe consumir datos desde **MockAPI** y permitir:
 
 ### 🌐 Enlaces importantes
 
-- [Demo del Trabajo Práctico](https://task1-vert-nine.vercel.app/) falta agregarla!
+- [Demo del Trabajo Práctico](https://task1-vert-nine.vercel.app/)
 - [Ejemplo de README](https://github.com/cintyy73/comision-2501-03/blob/clase-17/filter_fixed.png)
 
 ---
