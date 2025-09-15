@@ -1,47 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Comisiones</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
-<body class="section">
-
-  <div class="container">
-    <h1 class="title has-text-centered">📚 Comisiones de Programación</h1>
-
-    <!-- Filtros -->
-    <div class="box">
-      <div class="field is-grouped is-grouped-multiline">
-        <div class="control">
-          <div class="select">
-            <select id="filter-commission"></select>
-          </div>
-        </div>
-        <div class="control">
-          <div class="select">
-            <select id="filter-module"></select>
-          </div>
-        </div>
-        <div class="control">
-          <div class="select">
-            <select id="filter-status"></select>
-          </div>
-        </div>
-        <div class="control">
-          <button class="button is-primary" id="btn-filter">Filter</button>
-        </div>
-        <div class="control">
-          <button class="button is-success" id="btn-new">➕ New Commission</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contenedor de cards -->
-  <div id="cards-container" class="columns is-multiline"></div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
+<html></html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <select id="filter-status">
+      <option value="">All Statuses</option>
+      <option value="pending">Pending</option>
+      <option value="in-progress">In Progress</option>
+      <option value="completed">Completed</option>
+    </select>
+  </body>
 </html>
